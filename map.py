@@ -37,8 +37,7 @@ def circle():
 
     if (250+5 > mouse[0] > 250) and (500+5 > mouse[1] > 500):
         if click[0] == 1:
-            print("sflj ao;eijfald;kfja")
-            pygame.draw.rect(gameDisplay, WHITE, (200, 100, 600, 400))
+            import infotest.py
 intro = True
 
 while intro: #the main loop
