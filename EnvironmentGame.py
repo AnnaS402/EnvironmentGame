@@ -1,6 +1,7 @@
 import pygame, sys
 from pygame.locals import *
 
+
 from testmap import black
 
 pygame.init()
@@ -61,7 +62,7 @@ def button(msg,x,y,w,h,ic,ac, action = None):
             #     background = background + 1
             #     print("ASDF AWRFASDFA DS")
             # if background > 0:
-                black()
+                import map.py
 
 
     else:
