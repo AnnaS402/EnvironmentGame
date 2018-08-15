@@ -1,9 +1,10 @@
 import pygame, sys
 from pygame.locals import *
 
-# import map.py
+from testmap import black
 
 pygame.init()
+
 # pygame.display.set_caption('Save the Planet')
 
 display_width = 1000
@@ -15,7 +16,7 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 
 gameDisplay = pygame.display.set_mode((display_width, display_height))
-# gameDisplay.fill(GREEN)
+gameDisplay.fill(GREEN)
 
 
 def text_objects(text, font):
@@ -43,6 +44,7 @@ def text_objects(text, font):
 #     gameDisplay.blit(TextSurf, TextRect)
 #
 # GO_display("Go!")
+background = 0
 
 def button(msg,x,y,w,h,ic,ac, action = None):
     mouse = pygame.mouse.get_pos()
@@ -53,7 +55,15 @@ def button(msg,x,y,w,h,ic,ac, action = None):
         pygame.draw.rect(gameDisplay, ac,(x,y,w,h))
 
         if click[0] == 1 and action != None:
-            action()
+            blackground = background + 1
+
+            if action == "map":
+            #     background = background + 1
+            #     print("ASDF AWRFASDFA DS")
+            # if background > 0:
+                black()
+
+
     else:
         pygame.draw.rect(gameDisplay, ic,(x,y,w,h))
 
@@ -62,6 +72,7 @@ def button(msg,x,y,w,h,ic,ac, action = None):
     textSurf, textRect = textSurface, textSurface.get_rect()
     textRect.center = ( (x+(w/2)), (y+(h/2)) )
     gameDisplay.blit(textSurf, textRect)
+
 
 
 intro = True
@@ -74,13 +85,21 @@ while intro: #the main loop
             quit()
             sys.exit()
 
-    gameDisplay.fill(GREEN)
+    # if background < 0:
+    #     gameDisplay.fill(BLACK)
+    # else:
+    # gameDisplay.fill(GREEN)
+
+
     largeText = pygame.font.SysFont('freesansbold.ttf', 175)
     TextSurf, TextRect = text_objects("Save the World", largeText)
     TextRect.center = ((display_width/2),(display_height/2)- 75)
     gameDisplay.blit(TextSurf, TextRect)
 
-    button("GO!", 450, 400, 100, 50, WHITE, GREEN2)
+    button("GO!", 450, 400, 100, 50, WHITE, GREEN2, "map")
+
+    # if background > 0:
+    #     gameDisplay.fill(BLACK)
 
     pygame.display.update()
 
