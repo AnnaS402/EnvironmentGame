@@ -28,15 +28,36 @@ gameDisplay.blit(background_image, rect)
 
 #circle with possible play locations
 
-pygame.draw.circle(gameDisplay,(RED),(250, 500), 5)
+def circle():
+    pygame.draw.circle(gameDisplay,(RED),(250, 500), 5)
 
+    mouse = pygame.mouse.get_pos()
+    click = pygame.mouse.get_pressed()
+    print(click)
 
+    if (250+5 > mouse[0] > 250) and (500+5 > mouse[1] > 500):
+        if click[0] == 1:
+            print("sflj ao;eijfald;kfja")
+            gameDisplay.fill(RED)
 
-while True: # main game loop
+intro = True
+
+while intro: #the main loop
     for event in pygame.event.get():
-        if event.type == QUIT:
+        #print(event)
+        if event.type == pygame.QUIT:
             pygame.quit()
+            quit()
             sys.exit()
+    circle()
+
+
+
+# while True: # main game loop
+#     for event in pygame.event.get():
+#         if event.type == QUIT:
+#             pygame.quit()
+#             sys.exit()
 
 
 
