@@ -1,6 +1,6 @@
 import pygame, sys
 from pygame.locals import *
-
+from colors import *
 
 from testmap import black
 
@@ -8,15 +8,6 @@ pygame.init()
 
 # pygame.display.set_caption('Save the Planet')
 
-display_width = 1000
-display_height = 600
-
-GREEN = (0, 128, 0)
-GREEN2 = (0, 80, 0)
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-
-gameDisplay = pygame.display.set_mode((display_width, display_height))
 gameDisplay.fill(GREEN)
 
 
@@ -45,7 +36,7 @@ def text_objects(text, font):
 #     gameDisplay.blit(TextSurf, TextRect)
 #
 # GO_display("Go!")
-background = 0
+# background = 0
 
 def button(msg,x,y,w,h,ic,ac, action = None):
     mouse = pygame.mouse.get_pos()
@@ -56,7 +47,7 @@ def button(msg,x,y,w,h,ic,ac, action = None):
         pygame.draw.rect(gameDisplay, ac,(x,y,w,h))
 
         if click[0] == 1 and action != None:
-            blackground = background + 1
+            # blackground = background + 1
 
             if action == "map":
             #     background = background + 1
