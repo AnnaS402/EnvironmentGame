@@ -1,5 +1,6 @@
 import pygame, sys
 from pygame.locals import *
+
 img = pygame.image.load("EnvironmentGameMap.png")
 
 pygame.init()
@@ -7,11 +8,10 @@ pygame.init()
 display_width = 1000
 display_height = 600
 
-BLACK = (255, 255, 255)
-RED = (255, 0, 0)
 
-#background is map
-
+BLACK = (0,0,0)
+WHITE = (255,255,255)
+RED = (255, 0,0)
 gameDisplay = pygame.display.set_mode((display_width, display_height))
 gameDisplay.fill(BLACK)
 
@@ -38,8 +38,7 @@ def circle():
     if (250+5 > mouse[0] > 250) and (500+5 > mouse[1] > 500):
         if click[0] == 1:
             print("sflj ao;eijfald;kfja")
-            gameDisplay.fill(RED)
-
+            pygame.draw.rect(gameDisplay, WHITE, (200, 100, 600, 400))
 intro = True
 
 while intro: #the main loop

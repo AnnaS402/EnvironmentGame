@@ -8,5 +8,6 @@ GREEN = (0, 128, 0)
 GREEN2 = (0, 80, 0)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
+RED = (255, 0, 0)
 
 gameDisplay = pygame.display.set_mode((display_width, display_height))
