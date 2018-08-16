@@ -1,5 +1,9 @@
 import pygame, sys
 from pygame.locals import *
+import time
+start_frame = time.time()
+noi = 5
+frames_per_second = .5
 
 img5 = pygame.image.load("sprites/running/fox5running.png")
 img4 = pygame.image.load("sprites/running/fox4running.png")
@@ -53,11 +57,12 @@ class TestSprite(pygame.sprite.Sprite):
         self.image = self.images[self.index]
         self.rect = pygame.Rect(5, 5, 64, 64)
 
-    def update(self):
+    def update(self, gameDisplay):
         self.index += 1
         if self.index >= len(self.images):
             self.index = 0
         self.image = self.images[self.index]
+        gameDisplay.blit
 
 def main():
     pygame.init()
@@ -74,9 +79,9 @@ def main():
         # Calling the 'my_group.update' function calls the 'update' function of all
         # its member sprites. Calling the 'my_group.draw' function uses the 'image'
         # and 'rect' attributes of its member sprites to draw the sprite.
-        my_group.update()
+        my_group.update(gameDisplay)
         my_group.draw(gameDisplay)
         pygame.display.flip()
-
+        current_image = int((time.time() - start_frame) * frames_per_second % noi)
 if __name__ == '__main__':
     main()
