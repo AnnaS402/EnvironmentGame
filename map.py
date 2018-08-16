@@ -1,6 +1,6 @@
 import pygame, sys
 from pygame.locals import *
-from infotest import forest
+from forestInfo import forest
 
 img = pygame.image.load("EnvironmentGameMap.png").convert()
 
@@ -40,7 +40,6 @@ def circle():
     # if (247 > mouse[0] > 253) and (502 > mouse[1] > 508):
     if (253 > mouse[0] > 247) and (508 > mouse[1] > 502):
         pygame.draw.circle(gameDisplay, (RED), (250, 505), 12)
-        print("sdlf jpaosejfa;kdsa")
         # pygame.draw.circle.set_alpha((5,5))
         # dotGone = dot.get_at((0,0))
         # dot.set_colorkey(dotGone)

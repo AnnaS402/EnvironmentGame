@@ -1,6 +1,7 @@
 import pygame, sys
 from pygame.locals import *
 from colors import *
+from EnvironmentGame import button
 
 def forest():
     img = pygame.image.load("coastalForest.png")
@@ -20,6 +21,13 @@ def forest():
     # infobox.center(0,0)
 
     gameDisplay.blit(infobox, rect)
+
+    button("EASY", 270, 415, 110, 50, GREY_DARK, GREY_LIGHT, action = None)
+    pygame.draw.rect(gameDisplay, BLACK, (270, 415, 110, 50), 2)
+    button("NORMAL", 445, 415, 110, 50, GREY_DARK, GREY_LIGHT, action = None)
+    pygame.draw.rect(gameDisplay, BLACK, (445, 415, 110, 50), 2)
+    button("HARD", 620, 415, 110, 50, GREY_DARK, GREY_LIGHT, action = None)
+    pygame.draw.rect(gameDisplay, BLACK, (620, 415, 110, 50), 2)
 # def text_to_screen(screen, text, x, y, size = 50, color = (200, 0, 0), font_type = "data/fonts/orecrusherexpand.ttf"):
 #     # try:
 #     text = str(text)
