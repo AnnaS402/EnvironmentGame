@@ -2,7 +2,6 @@ import pygame, sys
 from pygame.locals import *
 from colors import *
 
-from testmap import black
 
 pygame.init()
 
