@@ -22,7 +22,7 @@ def forest():
 
     gameDisplay.blit(infobox, rect)
 
-    button("EASY", 270, 415, 110, 50, GREY_DARK, GREY_LIGHT, action = None)
+    button("EASY", 270, 415, 110, 50, GREY_DARK, GREY_LIGHT, "easy")
     pygame.draw.rect(gameDisplay, BLACK, (270, 415, 110, 50), 2)
     button("NORMAL", 445, 415, 110, 50, GREY_DARK, GREY_LIGHT, action = None)
     pygame.draw.rect(gameDisplay, BLACK, (445, 415, 110, 50), 2)
@@ -41,8 +41,8 @@ def button(msg,x,y,w,h,ic,ac, action = None):
         if click[0] == 1 and action != None:
             # blackground = background + 1
 
-            if action == "map":
-                import map.py
+            if action == "easy":
+                import game.py
             #     background = background + 1
                 # print("ASDF AWRFASDFA DS")
                 # map.circle()
