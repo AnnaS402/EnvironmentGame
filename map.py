@@ -4,6 +4,7 @@ from forestInfo import forest
 from colors import *
 
 
+
 img = pygame.image.load("EnvironmentGameMap.png").convert()
 
 pygame.init()
@@ -20,7 +21,8 @@ rect = background_image.get_rect()
 gameDisplay.blit(background_image, rect)
 
 #circle with possible play locations
-def circle():
+forestTextBox = False
+def circle(forestTextBox):
     # dot =
     pygame.draw.circle(gameDisplay,(RED),(250, 505), 6)
 
@@ -45,6 +47,9 @@ def circle():
         # sfc.set_colorkey(pygame.Color(255,255,255))
         # pygame.draw.circle(gameDisplay,(RED),(250, 505), 6)
         forest()
+        forestTextBox = True
+    if forestTextBox == True:
+        return forestTextBox
             # import infotest.py
             # img = pygame.image.load("coastalForest.png")
             # # img.center(0,0)
@@ -66,19 +71,82 @@ def circle():
 
 
 
+sideScrollGame = False
+def button(sideScrollGame, forestTextBox, msg,x,y,w,h,ic,ac, action = None):
+    mouse = pygame.mouse.get_pos()
+    click = pygame.mouse.get_pressed()
+    print(click)
+
+    if (x+w > mouse[0] > x) and (y+h > mouse[1] > y):
+        pygame.draw.rect(gameDisplay, ac,(x,y,w,h))
+
+        if click[0] == 1 and action != None:
+            # blackground = background + 1
+
+            if action == "easy":
+                gameDisplay.fill(WHITE)
+                pygame.display.update()
+
+                print("asdlfj aopw;e jfa;lkdsfaj;lkdsf")
+                sideScrollGame = True
+                # forestTextBox = False
+                return sideScrollGame
+                # theGame()
+                # pygame.display.update()
+                # import game.py
+                # pygame.display.update()
 
 
+    else:
+        pygame.draw.rect(gameDisplay, ic,(x,y,w,h))
+
+    smallText = pygame.font.Font("freesansbold.ttf", 20)
+    textSurface = smallText.render(msg, True, BLACK)
+    textSurf, textRect = textSurface, textSurface.get_rect()
+    textRect.center = ( (x+(w/2)), (y+(h/2)) )
+    gameDisplay.blit(textSurf, textRect)
 
 intro = True
 
+
+
 while intro: #the main loop
+    print(forestTextBox)
     for event in pygame.event.get():
         #print(event)
         if event.type == pygame.QUIT:
             pygame.quit()
             quit()
             sys.exit()
-    circle()
+
+    forestTextBox = circle(forestTextBox)
+
+
+    if forestTextBox == True:
+        print("10192837904879135098619845")
+        sideScrollGame = button(sideScrollGame, forestTextBox, "EASY", 270, 415, 110, 50, GREY_DARK, GREY_LIGHT, "easy")
+        pygame.draw.rect(gameDisplay, BLACK, (270, 415, 110, 50), 2)
+        button(sideScrollGame, forestTextBox, "NORMAL", 445, 415, 110, 50, GREY_DARK, GREY_LIGHT, action = None)
+        pygame.draw.rect(gameDisplay, BLACK, (445, 415, 110, 50), 2)
+        button(sideScrollGame, forestTextBox, "HARD", 620, 415, 110, 50, GREY_DARK, GREY_LIGHT, action = None)
+        pygame.draw.rect(gameDisplay, BLACK, (620, 415, 110, 50), 2)
+
+
+
+        # gameDisplay.fill(WHITE)
+    if sideScrollGame == True:
+        forestTextBox = False
+        background_image2 = pygame.image.load("background1.png").convert()
+
+        background_image2 = pygame.transform.scale(background_image2, (1000, 600))
+        rect = background_image2.get_rect()
+
+        gameDisplay.blit(background_image2, rect)
+
+    # else:
+    # gameDisplay.blit(infobox, (0,0)
+    # gameDisplay.blit(background_image, (0,0))
+
 
 
 

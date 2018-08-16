@@ -22,13 +22,15 @@ def forest():
 
     gameDisplay.blit(infobox, rect)
 
-    button("EASY", 270, 415, 110, 50, GREY_DARK, GREY_LIGHT, "easy")
-    pygame.draw.rect(gameDisplay, BLACK, (270, 415, 110, 50), 2)
-    button("NORMAL", 445, 415, 110, 50, GREY_DARK, GREY_LIGHT, action = None)
-    pygame.draw.rect(gameDisplay, BLACK, (445, 415, 110, 50), 2)
-    button("HARD", 620, 415, 110, 50, GREY_DARK, GREY_LIGHT, action = None)
-    pygame.draw.rect(gameDisplay, BLACK, (620, 415, 110, 50), 2)
+    #
+    # button("EASY", 270, 415, 110, 50, GREY_DARK, GREY_LIGHT, "easy")
+    # pygame.draw.rect(gameDisplay, BLACK, (270, 415, 110, 50), 2)
+    # button("NORMAL", 445, 415, 110, 50, GREY_DARK, GREY_LIGHT, action = None)
+    # pygame.draw.rect(gameDisplay, BLACK, (445, 415, 110, 50), 2)
+    # button("HARD", 620, 415, 110, 50, GREY_DARK, GREY_LIGHT, action = None)
+    # pygame.draw.rect(gameDisplay, BLACK, (620, 415, 110, 50), 2)
 
+    # forestTextBox = True
 
 def button(msg,x,y,w,h,ic,ac, action = None):
     mouse = pygame.mouse.get_pos()
@@ -42,7 +44,9 @@ def button(msg,x,y,w,h,ic,ac, action = None):
             # blackground = background + 1
 
             if action == "easy":
+                print("asdlfj aopw;e jfa;lkdsfaj;lkdsf")
                 import game.py
+
             #     background = background + 1
                 # print("ASDF AWRFASDFA DS")
                 # map.circle()

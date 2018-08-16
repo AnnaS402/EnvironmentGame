@@ -13,3 +13,5 @@ GREY_LIGHT = (224, 224, 224)
 GREY_DARK = (192, 192, 192)
 
 gameDisplay = pygame.display.set_mode((display_width, display_height))
+
+forestTextBox = False
