@@ -1,6 +1,8 @@
 import pygame, sys
 from pygame.locals import *
 from colors import *
+# import map
+
 
 
 pygame.init()
@@ -49,12 +51,31 @@ def button(msg,x,y,w,h,ic,ac, action = None):
             # blackground = background + 1
 
             if action == "map":
-            #     background = background + 1
-            #     print("ASDF AWRFASDFA DS")
-            # if background > 0:
                 import map.py
+            #     background = background + 1
+                # print("ASDF AWRFASDFA DS")
+                # map.circle()
+            # if background > 0:
 
+                # img = pygame.image.load("EnvironmentGameMap.png").convert()
+                #
+                # pygame.init()
+                #
+                # gameDisplay.fill(BLACK)
+                #
+                # #scales background to take up gamedisplay
+                #
+                # background_image = pygame.image.load("EnvironmentGameMap.png").convert()
+                #
+                # background_image = pygame.transform.scale(background_image, (1000, 600))
+                # rect = background_image.get_rect()
+                #
+                # gameDisplay.blit(background_image, rect)
 
+            #
+            # elif action == "easy":
+            #     gameDisplay.fill(BLACK)
+                # map.newMap()
     else:
         pygame.draw.rect(gameDisplay, ic,(x,y,w,h))
 

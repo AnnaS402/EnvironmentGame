@@ -1,19 +1,13 @@
 import pygame, sys
 from pygame.locals import *
 from forestInfo import forest
+from colors import *
+
 
 img = pygame.image.load("EnvironmentGameMap.png").convert()
 
 pygame.init()
 
-display_width = 1000
-display_height = 600
-
-
-BLACK = (0,0,0)
-WHITE = (255,255,255)
-RED = (255, 0,0)
-gameDisplay = pygame.display.set_mode((display_width, display_height))
 gameDisplay.fill(BLACK)
 
 #scales background to take up gamedisplay
@@ -25,10 +19,7 @@ rect = background_image.get_rect()
 
 gameDisplay.blit(background_image, rect)
 
-
-
 #circle with possible play locations
-
 def circle():
     # dot =
     pygame.draw.circle(gameDisplay,(RED),(250, 505), 6)
@@ -72,6 +63,12 @@ def circle():
             # infobox.center(0,0)
 
             # gameDisplay.blit(infobox, rect)
+
+
+
+
+
+
 intro = True
 
 while intro: #the main loop

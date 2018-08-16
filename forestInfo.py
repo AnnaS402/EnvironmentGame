@@ -1,7 +1,7 @@
 import pygame, sys
 from pygame.locals import *
 from colors import *
-from EnvironmentGame import button
+# from EnvironmentGame import button
 
 def forest():
     img = pygame.image.load("coastalForest.png")
@@ -28,6 +28,53 @@ def forest():
     pygame.draw.rect(gameDisplay, BLACK, (445, 415, 110, 50), 2)
     button("HARD", 620, 415, 110, 50, GREY_DARK, GREY_LIGHT, action = None)
     pygame.draw.rect(gameDisplay, BLACK, (620, 415, 110, 50), 2)
+
+
+def button(msg,x,y,w,h,ic,ac, action = None):
+    mouse = pygame.mouse.get_pos()
+    click = pygame.mouse.get_pressed()
+    print(click)
+
+    if (x+w > mouse[0] > x) and (y+h > mouse[1] > y):
+        pygame.draw.rect(gameDisplay, ac,(x,y,w,h))
+
+        if click[0] == 1 and action != None:
+            # blackground = background + 1
+
+            if action == "map":
+                import map.py
+            #     background = background + 1
+                # print("ASDF AWRFASDFA DS")
+                # map.circle()
+            # if background > 0:
+
+                # img = pygame.image.load("EnvironmentGameMap.png").convert()
+                #
+                # pygame.init()
+                #
+                # gameDisplay.fill(BLACK)
+                #
+                # #scales background to take up gamedisplay
+                #
+                # background_image = pygame.image.load("EnvironmentGameMap.png").convert()
+                #
+                # background_image = pygame.transform.scale(background_image, (1000, 600))
+                # rect = background_image.get_rect()
+                #
+                # gameDisplay.blit(background_image, rect)
+
+            #
+            # elif action == "easy":
+            #     gameDisplay.fill(BLACK)
+                # map.newMap()
+    else:
+        pygame.draw.rect(gameDisplay, ic,(x,y,w,h))
+
+    smallText = pygame.font.Font("freesansbold.ttf", 20)
+    textSurface = smallText.render(msg, True, BLACK)
+    textSurf, textRect = textSurface, textSurface.get_rect()
+    textRect.center = ( (x+(w/2)), (y+(h/2)) )
+    gameDisplay.blit(textSurf, textRect)
 # def text_to_screen(screen, text, x, y, size = 50, color = (200, 0, 0), font_type = "data/fonts/orecrusherexpand.ttf"):
 #     # try:
 #     text = str(text)
