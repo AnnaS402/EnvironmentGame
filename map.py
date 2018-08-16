@@ -71,8 +71,10 @@ def circle(forestTextBox):
 
 
 
-sideScrollGame = False
-def button(sideScrollGame, forestTextBox, msg,x,y,w,h,ic,ac, action = None):
+sideScrollGame1 = False
+sideScrollGame2 = False
+sideScrollGame3 = False
+def button(sideScrollGame1, sideScrollGame2, sideScrollGame3, forestTextBox, msg,x,y,w,h,ic,ac, action = None):
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
     print(click)
@@ -88,14 +90,30 @@ def button(sideScrollGame, forestTextBox, msg,x,y,w,h,ic,ac, action = None):
                 pygame.display.update()
 
                 print("asdlfj aopw;e jfa;lkdsfaj;lkdsf")
-                sideScrollGame = True
+                sideScrollGame1 = True
                 # forestTextBox = False
-                return sideScrollGame
+                return sideScrollGame1
                 # theGame()
                 # pygame.display.update()
                 # import game.py
                 # pygame.display.update()
+            elif action == "normal":
+                gameDisplay.fill(WHITE)
+                pygame.display.update()
 
+                print("asdlfj aopw;e jfa;lkdsfaj;lkdsf")
+                sideScrollGame2 = True
+                # forestTextBox = False
+                return sideScrollGame2
+
+            elif action == "hard":
+                gameDisplay.fill(WHITE)
+                pygame.display.update()
+
+                print("asdlfj aopw;e jfa;lkdsfaj;lkdsf")
+                sideScrollGame3 = True
+                # forestTextBox = False
+                return sideScrollGame3
 
     else:
         pygame.draw.rect(gameDisplay, ic,(x,y,w,h))
@@ -121,20 +139,23 @@ while intro: #the main loop
 
     forestTextBox = circle(forestTextBox)
 
+    # sideScrollGame1 = sideScrollGame
+    # sideScrollGame2 = sideScrollGame
+    # sideScrollGame3 = sideScrollGame
 
     if forestTextBox == True:
         print("10192837904879135098619845")
-        sideScrollGame = button(sideScrollGame, forestTextBox, "EASY", 270, 415, 110, 50, GREY_DARK, GREY_LIGHT, "easy")
+        sideScrollGame1 = button(sideScrollGame1, sideScrollGame2, sideScrollGame3, forestTextBox, "EASY", 270, 415, 110, 50, GREY_DARK, GREY_LIGHT, "easy")
         pygame.draw.rect(gameDisplay, BLACK, (270, 415, 110, 50), 2)
-        button(sideScrollGame, forestTextBox, "NORMAL", 445, 415, 110, 50, GREY_DARK, GREY_LIGHT, action = None)
+        sideScrollGame2 = button(sideScrollGame1, sideScrollGame2, sideScrollGame3, forestTextBox, "NORMAL", 445, 415, 110, 50, GREY_DARK, GREY_LIGHT, "normal")
         pygame.draw.rect(gameDisplay, BLACK, (445, 415, 110, 50), 2)
-        button(sideScrollGame, forestTextBox, "HARD", 620, 415, 110, 50, GREY_DARK, GREY_LIGHT, action = None)
+        sideScrollGame3 = button(sideScrollGame1, sideScrollGame2, sideScrollGame3, forestTextBox, "HARD", 620, 415, 110, 50, GREY_DARK, GREY_LIGHT, "hard")
         pygame.draw.rect(gameDisplay, BLACK, (620, 415, 110, 50), 2)
 
 
 
         # gameDisplay.fill(WHITE)
-    if sideScrollGame == True:
+    if sideScrollGame1 == True or sideScrollGame2 == True or sideScrollGame3 == True:
         forestTextBox = False
         background_image2 = pygame.image.load("background1.png").convert()
 
