@@ -1,43 +1,34 @@
 import pygame, sys
 from pygame.locals import *
 from colors import *
-# import map
+# from EnvironmentGame import button
 
+def forest():
+    img = pygame.image.load("coastalForest.png")
+    # img.center(0,0)
+    pygame.init()
+    # pygame.font.init()
+    # myfont = pygame.font.SysFont("Comic Sans MS", 30)
+    #
+    # gameDisplay.fill(GREEN)
 
+    # forest()
+    infobox = pygame.image.load("coastalForest.png")
+    # textsurface = myfont.render("Text color", False, (RED))
+    infobox = pygame.transform.scale(infobox, (600, 400))
+    rect = infobox.get_rect()
+    rect.center = (500, 300)
+    # infobox.center(0,0)
 
-pygame.init()
+    gameDisplay.blit(infobox, rect)
 
-# pygame.display.set_caption('Save the Planet')
+    button("EASY", 270, 415, 110, 50, GREY_DARK, GREY_LIGHT, action = None)
+    pygame.draw.rect(gameDisplay, BLACK, (270, 415, 110, 50), 2)
+    button("NORMAL", 445, 415, 110, 50, GREY_DARK, GREY_LIGHT, action = None)
+    pygame.draw.rect(gameDisplay, BLACK, (445, 415, 110, 50), 2)
+    button("HARD", 620, 415, 110, 50, GREY_DARK, GREY_LIGHT, action = None)
+    pygame.draw.rect(gameDisplay, BLACK, (620, 415, 110, 50), 2)
 
-gameDisplay.fill(GREEN)
-
-
-def text_objects(text, font):
-    textSurface = font.render(text, True, WHITE)
-    return textSurface, textSurface.get_rect()
-
-# def message_display(text):
-#     largeText = pygame.font.Font('freesansbold.ttf', 90)
-#     TextSurf, TextRect = text_objects(text, largeText)
-#     TextRect.center = ((display_width/2), (display_height/2))
-#     gameDisplay.blit(TextSurf, TextRect)
-#
-# message_display("Save the Planet")
-
-# def GO_objects(text, font):
-#     textSurface = font.render(text, True, BLACK)
-#     return textSurface, textSurface.get_rect()
-#
-# pygame.draw.rect(gameDisplay, WHITE,(350, 450, 100,50))
-#
-# def GO_display(text):
-#     GOtext = pygame.font.Font("freesansbold.ttf", 30)
-#     TextSurf, TextRect = GO_objects(text, GOtext)
-#     TextRect.center = ((400, 475))
-#     gameDisplay.blit(TextSurf, TextRect)
-#
-# GO_display("Go!")
-# background = 0
 
 def button(msg,x,y,w,h,ic,ac, action = None):
     mouse = pygame.mouse.get_pos()
@@ -84,45 +75,29 @@ def button(msg,x,y,w,h,ic,ac, action = None):
     textSurf, textRect = textSurface, textSurface.get_rect()
     textRect.center = ( (x+(w/2)), (y+(h/2)) )
     gameDisplay.blit(textSurf, textRect)
+# def text_to_screen(screen, text, x, y, size = 50, color = (200, 0, 0), font_type = "data/fonts/orecrusherexpand.ttf"):
+#     # try:
+#     text = str(text)
+#     font = pygame.font.Font(font_type, size)
+#     text = font.render(text, True, color)
+#     screen.blit(Text, (x,y))
+    # except Exception, e:
+    #     print "Font Error, saw it coming"
+    #     raise e
 
-
-
-intro = True
-
-while intro: #the main loop
-    for event in pygame.event.get():
-        #print(event)
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            quit()
-            sys.exit()
-
-    # if background < 0:
-    #     gameDisplay.fill(BLACK)
-    # else:
-    # gameDisplay.fill(GREEN)
-
-
-    largeText = pygame.font.SysFont('freesansbold.ttf', 175)
-    TextSurf, TextRect = text_objects("Save the World", largeText)
-    TextRect.center = ((display_width/2),(display_height/2)- 75)
-    gameDisplay.blit(TextSurf, TextRect)
-
-    button("GO!", 450, 400, 100, 50, WHITE, GREEN2, "map")
-
-    # if background > 0:
-    #     gameDisplay.fill(BLACK)
-
-    pygame.display.update()
-
-
-
-
-
+# Surface((width, height), flags=0, Surface)
 #
-# while True: # main game loop
+# intro = True
+#
+# while intro: #the main loop
 #     for event in pygame.event.get():
-#         if event.type == QUIT:
+#         #print(event)
+#         if event.type == pygame.QUIT:
 #             pygame.quit()
+#             quit()
 #             sys.exit()
+#
+#
+#     # screen.blit(textsurface, (0,0))
+#     # text_to_screen(screen, "please work", 100, 200)
 #     pygame.display.update()
