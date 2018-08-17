@@ -21,7 +21,7 @@ class player(object):
     run = [pygame.image.load(os.path.join("sprites/running/" + 'fox'+ str(x) + 'running' + '.png')) for x in range(1,9)]
     jump = [pygame.image.load(os.path.join("sprites/jumping/" + 'fox' + 'jump' + str(x) + '.png')) for x in range(0,7)]
     slide = [pygame.image.load(os.path.join("sprites/crouch/crouch0.png")),pygame.image.load(os.path.join("sprites/crouch/crouch1.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch1.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png"))]
-    fall = pygame.image.load(os.path.join("sprites/foxstop.png")).convert()
+    fall = pygame.image.load(os.path.join("sprites/stop/foxstop.png"))
     jumpList = [1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1,-1,-1,-1,-1,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4]
     def __init__(self, x, y, width, height):
         self.x = x
@@ -64,7 +64,7 @@ class player(object):
             self.slideCount += 1
 
         elif self.falling:
-            win.blit(fall, (self.x, self.y + 30))
+            win.blit(self.fall, (self.x, self.y + 30))
 
         else:
             if self.runCount > 42:
@@ -109,9 +109,14 @@ class sandBlock(trap):
 
     def collide(self, rect):
         if rect[0] + rect [2] > self.hitbox[0] and rect[0] < self.hitbox[0 + self.hitbox[2]]:
-            if rect[1] < self.hitbox[3]:
+            if rect[1] + rect[3] > self.hitbox[1]:
                 return True
         return False
+
+        # if rect[0] + rect [2] > self.hitbox[0] and rect[0] < self.hitbox[0 + self.hitbox[2]]:
+        #     if rect[1] < self.hitbox[3]:
+        #         return True
+        # return False
 
 
 def redrawWindow():
@@ -138,7 +143,7 @@ while run:
     for objectt in objects:
         if objectt.collide(runner.hitbox):
             runner.falling = True
-            pygame.time.delay(1000)
+
         objectt.x -= 1.4
         if objectt.x < -objectt.width * -1:
             objects.pop(objects.index(objectt))
