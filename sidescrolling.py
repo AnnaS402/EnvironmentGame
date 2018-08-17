@@ -3,6 +3,7 @@ from pygame.locals import *
 import os
 import sys
 import math
+import random
 # img = pygame.image.load("sprites/running/")
 pygame.init()
 
@@ -73,10 +74,10 @@ class trap(object):
         self.count = 0
 
     def draw(self, win):
-        self.hitbox = (self.x + 5, self.y + 5, self.width - 10, self.height)
+        self.hitbox = (self.x + 60, 430, self.width, self.height)
         if self.count >= 8:
             self.count = 0
-        win.blit(self.img [self.count//2], (self.count, self.y))
+        win.blit(self.img [self.count//2], (self.x, self.y))
         self.count += 1
         pygame.draw.rect(win, (255, 0, 0), self.hitbox, 2)
 
@@ -84,7 +85,7 @@ class trap(object):
 class sandBlock(trap):
     img = pygame.image.load(os.path.join("obstacles/sandblock.png"))
     def draw(self, win):
-        self.hitbox = (self.x + 10, self.y, 28, 315)
+        self.hitbox = (self.x + 47, 331, self.width, self.height)
         win.blit(self.img, (self.x, self.y))
         pygame.draw.rect(win, (255, 0, 0), self.hitbox,2)
 
@@ -93,19 +94,27 @@ def redrawWindow():
     win.blit(bg, (bgX, 0))
     win.blit(bg, (bgX2, 0))
     runner.draw(win)
-    sandBlockk.draw(win)
-    trapp.draw(win)
+    for x in objects:
+        x.draw(win)
     pygame.display.update()
 
-sandBlockk = sandBlock(300, 0, 48, 320)
-trapp = trap(300, 300, 64, 64)
+
 
 runner = player(90, 375, 16, 16)
 pygame.time.set_timer(USEREVENT+1, 500)
+pygame.time.set_timer(USEREVENT+2, random.randrange(3000,5000))
 speed = 50
 run = True
+
+objects = []
+
 while run:
     redrawWindow()
+
+    for objectt in objects:
+        objectt.x -= 1.4
+        if objectt.x < -objectt.width * -1:
+            objects.pop(objects.index(objectt))
 
     bgX -= 1.4
     bgX2 -= 1.4
@@ -122,6 +131,14 @@ while run:
 
         if event.type == USEREVENT+1:
             speed += 1
+
+        if event.type == USEREVENT+2:
+
+            r = random.randrange(0,2)
+            if r == 0:
+                objects.append(trap(1000, 390, 40, 40))
+            else:
+                objects.append(sandBlock(1000, 300, 110, 35))
 
 
 
