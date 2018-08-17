@@ -39,7 +39,7 @@ class player(object):
     def draw(self, win):
         if self.jumping:
             self.y -= self.jumpList[self.jumpCount] * 1.2
-            win.blit(self.jump[self.jumpCount//18], (self.x,self.y))
+            win.blit(self.jump[self.jumpCount//17], (self.x,self.y))
             self.jumpCount += 1
             if self.jumpCount > 108:
                 self.jumpCount = 0
@@ -92,12 +92,13 @@ class trap(object):
         self.count += 1
         pygame.draw.rect(win, (255, 0, 0), self.hitbox, 2)
 
+#collision detection stuff
 
-    def collide(self, rect):
-        if rect[0] + rect [2] > self.hitbox[0] and rect[0] < self.hitbox[0 + self.hitbox[2]]:
-            if rect[1] + rect[3] > self.hitbox[1]:
-                return True
-        return False
+    # def collide(self, rect):
+    #     if rect[0] + rect [2] > self.hitbox[0] and rect[0] < self.hitbox[0] + self.hitbox[2]:
+    #         if rect[1] + rect[3] > self.hitbox[1]:
+    #             return True
+    #     return False
 
 
 class sandBlock(trap):
@@ -107,16 +108,26 @@ class sandBlock(trap):
         win.blit(self.img, (self.x, self.y))
         pygame.draw.rect(win, (255, 0, 0), self.hitbox,2)
 
-    def collide(self, rect):
-        if rect[0] + rect [2] > self.hitbox[0] and rect[0] < self.hitbox[0 + self.hitbox[2]]:
-            if rect[1] + rect[3] > self.hitbox[1]:
-                return True
-        return False
+class flag(trap):
+    img = pygame.image.load(os.path.join("obstacles/checkpoint.png"))
+    def draw(self, win):
+        self.hitbox = (self.x, 430, self.width, self.height)
+        win.blit(self.img, (self.x, self.y))
 
-        # if rect[0] + rect [2] > self.hitbox[0] and rect[0] < self.hitbox[0 + self.hitbox[2]]:
-        #     if rect[1] < self.hitbox[3]:
-        #         return True
-        # return False
+
+
+
+#collision detection stuff
+    # def collide(self, rect):
+    #     # if rect[0] + rect [2] > self.hitbox[0] and rect[0] < self.hitbox[0] + self.hitbox[2]:
+    #     #     if rect[1] + rect[3] > self.hitbox[1]:
+    #     #         return True
+    #     # return False
+    #
+    #     if rect[0] + rect [2] > self.hitbox[0] and rect[0] < self.hitbox[0] + self.hitbox[2]:
+    #         if rect[1] < self.hitbox[3]:
+    #             return True
+    #     return False
 
 
 def redrawWindow():
@@ -125,6 +136,8 @@ def redrawWindow():
     runner.draw(win)
     for x in objects:
         x.draw(win)
+    for x in checkpoints:
+        x.draw(win)
     pygame.display.update()
 
 
@@ -132,21 +145,31 @@ def redrawWindow():
 runner = player(90, 375, 16, 16)
 pygame.time.set_timer(USEREVENT+1, 500)
 pygame.time.set_timer(USEREVENT+2, random.randrange(3000,5000))
-speed = 50
+pygame.time.set_timer(USEREVENT+3, 5000)
+speed = 80
 run = True
 
 objects = []
+checkpoints = []
 
 while run:
     redrawWindow()
 
-    for objectt in objects:
-        if objectt.collide(runner.hitbox):
-            runner.falling = True
 
+    for objectt in objects:
+        # if objectt.collide(runner.hitbox):
+        #     runner.falling = True
+            # pygame.time.delay(10000)
         objectt.x -= 1.4
         if objectt.x < -objectt.width * -1:
             objects.pop(objects.index(objectt))
+
+    for checkpointss in checkpoints:
+        checkpointss.x -= 1.4
+        if flag == (150, 390):
+            pygame.time.delay(3000)
+        # if self.hitbox == (94, 430, self.width, self.height):
+        #     pygame.time.delay(3000)
 
     bgX -= 1.4
     bgX2 -= 1.4
@@ -171,6 +194,10 @@ while run:
                 objects.append(trap(1000, 390, 40, 40))
             else:
                 objects.append(sandBlock(1000, 335, 110, 35))
+        if event.type == USEREVENT+3:
+            checkpoints.append(flag(1000, 390, 40, 100))
+            # if objectt.collide():
+            #     pygame.time.delay(1000)
 
 
 
