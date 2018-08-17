@@ -168,9 +168,9 @@ while intro: #the main loop
         # gameDisplay.fill(WHITE)
     if sideScrollGame1 == True or sideScrollGame2 == True or sideScrollGame3 == True:
         forestTextBox = False
-        sand = "background1.png"
-        sandtrees = "background3.png"
-        trees = "background2.png"
+        sand = "Backgrounds/background1.png"
+        sandtrees = "Backgrounds/background3.png"
+        trees = "Backgrounds/background2.png"
 
         if sideScrollGame1:
             bg = sand
