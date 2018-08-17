@@ -3,46 +3,7 @@ from pygame.locals import *
 from pygame.time import *
 
 pygame.init()
-#
-# while True:
-#     ms = pygame.time.get_ticks()
-    # print(ms)
-#---------------
-# iterations = 1000
-#
-# timestart = pygame.time.get_ticks()
-#
-# for a in range(iterations):
-# 	pygame.time.delay(0)
-#
-# timeold = pygame.time.get_ticks()
-# timeperloop1 = (timeold - timestart) / float(iterations)
-# print(timeperloop1)
-# ---------------------
-# while True:
-#     pygame.time.wait(500)                # wait 500ms
-#
-#     print (pygame.time.get_ticks(), "ms")
-# -----------------------------
-# __all__ = ["Clock"]
-#
-# def get_ticks():
-#     return pygame.time.get_ticks()
-#
-# def wait(milliseconds):
-#     pygame.time.wait(milliseconds)
-#
-# def delay(milliseconds):
-#     pygame.time.delay(milliseconds)
-# -----------------
-# start_ticks=pygame.time.get_ticks() #starter tick
-# mainloop=True
-# while mainloop: # mainloop
-#     seconds=(pygame.time.get_ticks()-start_ticks)/1000 #calculate how many seconds
-#     if seconds>10: # if more than 10 seconds close the game
-#         break
-#     print (seconds) #print how many seconds
-# ------------------
+
 screen = pygame.display.set_mode((128, 128))
 clock = pygame.time.Clock()
 
