@@ -118,7 +118,7 @@ def button(sideScrollGame1, sideScrollGame2, sideScrollGame3, forestTextBox, msg
     else:
         pygame.draw.rect(gameDisplay, ic,(x,y,w,h))
 
-    smallText = pygame.font.Font("freesansbold.ttf", 20)
+    smallText = pygame.font.Font("OstrichSans-Bold.otf", 30)
     textSurface = smallText.render(msg, True, BLACK)
     textSurf, textRect = textSurface, textSurface.get_rect()
     textRect.center = ( (x+(w/2)), (y+(h/2)) )
@@ -145,11 +145,11 @@ while intro: #the main loop
 
     if forestTextBox == True:
         print("10192837904879135098619845")
-        sideScrollGame1 = button(sideScrollGame1, sideScrollGame2, sideScrollGame3, forestTextBox, "EASY", 270, 415, 110, 50, GREY_DARK, GREY_LIGHT, "easy")
+        sideScrollGame1 = button(sideScrollGame1, sideScrollGame2, sideScrollGame3, forestTextBox, "E A S Y", 270, 415, 110, 50, GREY_LIGHT, GREY_DARK, "easy")
         pygame.draw.rect(gameDisplay, BLACK, (270, 415, 110, 50), 2)
-        sideScrollGame2 = button(sideScrollGame1, sideScrollGame2, sideScrollGame3, forestTextBox, "NORMAL", 445, 415, 110, 50, GREY_DARK, GREY_LIGHT, "normal")
+        sideScrollGame2 = button(sideScrollGame1, sideScrollGame2, sideScrollGame3, forestTextBox, "N O R M A L", 445, 415, 110, 50, GREY_LIGHT, GREY_DARK, "normal")
         pygame.draw.rect(gameDisplay, BLACK, (445, 415, 110, 50), 2)
-        sideScrollGame3 = button(sideScrollGame1, sideScrollGame2, sideScrollGame3, forestTextBox, "HARD", 620, 415, 110, 50, GREY_DARK, GREY_LIGHT, "hard")
+        sideScrollGame3 = button(sideScrollGame1, sideScrollGame2, sideScrollGame3, forestTextBox, "H A R D", 620, 415, 110, 50, GREY_LIGHT, GREY_DARK, "hard")
         pygame.draw.rect(gameDisplay, BLACK, (620, 415, 110, 50), 2)
 
 
@@ -157,12 +157,33 @@ while intro: #the main loop
         # gameDisplay.fill(WHITE)
     if sideScrollGame1 == True or sideScrollGame2 == True or sideScrollGame3 == True:
         forestTextBox = False
-        background_image2 = pygame.image.load("background1.png").convert()
+        sand = "background1.png"
+        sandtrees = "background3.png"
+        trees = "background2.png"
 
+        if sideScrollGame1:
+            bg = sand
+        elif sideScrollGame2:
+            bg = sandtrees
+        elif sideScrollGame3:
+            bg = trees
+        else:
+            print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        background_image2 = pygame.image.load(bg).convert()
         background_image2 = pygame.transform.scale(background_image2, (1000, 600))
         rect = background_image2.get_rect()
 
+        instructions = pygame.image.load("demo.png")
+        instructions = pygame.transform.scale(instructions, (600, 400))
+        rect2 = instructions.get_rect()
+        rect2.center = (500, 300)
+
         gameDisplay.blit(background_image2, rect)
+        # pygame.time.wait(500)
+        gameDisplay.blit(instructions, rect2)
+
+        button(sideScrollGame1, sideScrollGame2, sideScrollGame3, forestTextBox, "Press to Play!!", 415, 405, 170, 50, GREY_LIGHT, GREY_DARK, "play")
+        pygame.draw.rect(gameDisplay, BLACK, (415, 405, 170, 50), 2)
 
     # else:
     # gameDisplay.blit(infobox, (0,0)

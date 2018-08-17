@@ -79,7 +79,7 @@ def button(msg,x,y,w,h,ic,ac, action = None):
     else:
         pygame.draw.rect(gameDisplay, ic,(x,y,w,h))
 
-    smallText = pygame.font.Font("freesansbold.ttf", 20)
+    smallText = pygame.font.Font("OstrichSans-Bold.otf", 30)
     textSurface = smallText.render(msg, True, BLACK)
     textSurf, textRect = textSurface, textSurface.get_rect()
     textRect.center = ( (x+(w/2)), (y+(h/2)) )
@@ -103,12 +103,12 @@ while intro: #the main loop
     # gameDisplay.fill(GREEN)
 
 
-    largeText = pygame.font.SysFont('freesansbold.ttf', 175)
+    largeText = pygame.font.Font("OstrichSans-Bold.otf", 175)
     TextSurf, TextRect = text_objects("Save the World", largeText)
     TextRect.center = ((display_width/2),(display_height/2)- 75)
     gameDisplay.blit(TextSurf, TextRect)
 
-    button("GO!", 450, 400, 100, 50, WHITE, GREEN2, "map")
+    button("G O !", 450, 400, 100, 50, WHITE, GREEN2, "map")
 
     # if background > 0:
     #     gameDisplay.fill(BLACK)
