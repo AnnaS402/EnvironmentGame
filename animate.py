@@ -1,87 +1,65 @@
-import pygame, sys
+import pygame
 from pygame.locals import *
-import time
-start_frame = time.time()
-noi = 5
-frames_per_second = .5
+from pygame.time import *
 
-img5 = pygame.image.load("sprites/running/fox5running.png")
-img4 = pygame.image.load("sprites/running/fox4running.png")
-img3 = pygame.image.load("sprites/running/fox3running.png")
-img2 = pygame.image.load("sprites/running/fox2running.png")
-img1 = pygame.image.load("sprites/running/fox1running.png")
-
-display_width = 1000
-display_height = 600
-
-sprite_image5 = pygame.image.load("sprites/running/fox5running.png")
-sprite_image4 = pygame.image.load("sprites/running/fox4running.png")
-sprite_image3 = pygame.image.load("sprites/running/fox3running.png")
-sprite_image2 = pygame.image.load("sprites/running/fox5running.png")
-sprite_image1 = pygame.image.load("sprites/running/fox1running.png")
-
-rect = sprite_image1.get_rect()
-# gameDisplay.blit(sprite_image1, rect)
-# gameDisplay.blit(sprite_image2, rect)
-# gameDisplay.blit(sprite_image3, rect)
-# gameDisplay.blit(sprite_image4, rect)
-# gameDisplay.blit(sprite_image5, rect)
+pygame.init()
 #
-# while True: #main game loop
-#     for event in pygame.event.get():
-#         if event.type == QUIT:
-#             pygame.quit()
-#             sys.exit()
+# while True:
+#     ms = pygame.time.get_ticks()
+    # print(ms)
+#---------------
+# iterations = 1000
 #
-#     pygame.display.update()
+# timestart = pygame.time.get_ticks()
+#
+# for a in range(iterations):
+# 	pygame.time.delay(0)
+#
+# timeold = pygame.time.get_ticks()
+# timeperloop1 = (timeold - timestart) / float(iterations)
+# print(timeperloop1)
+# ---------------------
+# while True:
+#     pygame.time.wait(500)                # wait 500ms
+#
+#     print (pygame.time.get_ticks(), "ms")
+# -----------------------------
+# __all__ = ["Clock"]
+#
+# def get_ticks():
+#     return pygame.time.get_ticks()
+#
+# def wait(milliseconds):
+#     pygame.time.wait(milliseconds)
+#
+# def delay(milliseconds):
+#     pygame.time.delay(milliseconds)
+# -----------------
+# start_ticks=pygame.time.get_ticks() #starter tick
+# mainloop=True
+# while mainloop: # mainloop
+#     seconds=(pygame.time.get_ticks()-start_ticks)/1000 #calculate how many seconds
+#     if seconds>10: # if more than 10 seconds close the game
+#         break
+#     print (seconds) #print how many seconds
+# ------------------
+screen = pygame.display.set_mode((128, 128))
+clock = pygame.time.Clock()
 
-# ---------------------------------------------------------
+counter, text = 30, '30'.rjust(3)
+pygame.time.set_timer(pygame.USEREVENT, 1000)
+font = pygame.font.SysFont('Consolas', 30)
 
-def load_image(name):
-    image = pygame.image.load(name)
-    return image
-
-class TestSprite(pygame.sprite.Sprite):
-    def __init__(self):
-        super(TestSprite, self).__init__()
-        self.images = []
-        self.images.append(load_image("sprites/running/fox1running.png"))
-        self.images.append(load_image("sprites/running/fox2running.png"))
-        self.images.append(load_image("sprites/running/fox3running.png"))
-        self.images.append(load_image("sprites/running/fox4running.png"))
-        self.images.append(load_image("sprites/running/fox5running.png"))
-
-
-
-        self.index = 0
-        self.image = self.images[self.index]
-        self.rect = pygame.Rect(5, 5, 64, 64)
-
-    def update(self, gameDisplay):
-        self.index += 1
-        if self.index >= len(self.images):
-            self.index = 0
-        self.image = self.images[self.index]
-        gameDisplay.blit
-
-def main():
-    pygame.init()
-    gameDisplay = pygame.display.set_mode((display_width, display_height))
-    my_sprite = TestSprite()
-    my_group = pygame.sprite.Group(my_sprite)
-
-    while True:
-        event = pygame.event.poll()
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit(0)
-
-        # Calling the 'my_group.update' function calls the 'update' function of all
-        # its member sprites. Calling the 'my_group.draw' function uses the 'image'
-        # and 'rect' attributes of its member sprites to draw the sprite.
-        my_group.update(gameDisplay)
-        my_group.draw(gameDisplay)
+while True:
+    for e in pygame.event.get():
+        if e.type == pygame.USEREVENT:
+            counter -= 1
+            text = str(counter).rjust(3) if counter > 0 else 'boom!'
+        if e.type == pygame.QUIT: break
+    else:
+        screen.fill((255, 255, 255))
+        screen.blit(font.render(text, True, (0, 0, 0)), (32, 48))
         pygame.display.flip()
-        current_image = int((time.time() - start_frame) * frames_per_second % noi)
-if __name__ == '__main__':
-    main()
+        clock.tick(60)
+        continue
+    break
