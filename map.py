@@ -126,6 +126,9 @@ def button(sideScrollGame1, sideScrollGame2, sideScrollGame3, forestTextBox, msg
                 # forestTextBox = False
                 return sideScrollGame3
 
+            elif action == "play":
+                import sidescrolling.py
+                # gameDisplay.fill(BLACK)
     else:
         pygame.draw.rect(gameDisplay, ic,(x,y,w,h))
 
@@ -156,12 +159,12 @@ while intro: #the main loop
 
     if forestTextBox == True:
         print("10192837904879135098619845")
-        sideScrollGame1 = button(sideScrollGame1, sideScrollGame2, sideScrollGame3, forestTextBox, "E A S Y", 245, 415, 140, 50, GREY_LIGHT, GREY_DARK, "easy")
-        pygame.draw.rect(gameDisplay, BLACK, (245, 415, 140, 50), 2)
-        sideScrollGame2 = button(sideScrollGame1, sideScrollGame2, sideScrollGame3, forestTextBox, "N O R M A L", 430, 415, 140, 50, GREY_LIGHT, GREY_DARK, "normal")
-        pygame.draw.rect(gameDisplay, BLACK, (430, 415, 140, 50), 2)
-        sideScrollGame3 = button(sideScrollGame1, sideScrollGame2, sideScrollGame3, forestTextBox, "H A R D", 615, 415, 140, 50, GREY_LIGHT, GREY_DARK, "hard")
-        pygame.draw.rect(gameDisplay, BLACK, (615, 415, 140, 50), 2)
+        sideScrollGame1 = button(sideScrollGame1, sideScrollGame2, sideScrollGame3, forestTextBox, "E A S Y", 245, 415, 140, 40, GREY_LIGHT, GREY_DARK, "easy")
+        pygame.draw.rect(gameDisplay, BLACK, (245, 415, 140, 40), 2)
+        sideScrollGame2 = button(sideScrollGame1, sideScrollGame2, sideScrollGame3, forestTextBox, "N O R M A L", 430, 415, 140, 40, GREY_LIGHT, GREY_DARK, "normal")
+        pygame.draw.rect(gameDisplay, BLACK, (430, 415, 140, 40), 2)
+        sideScrollGame3 = button(sideScrollGame1, sideScrollGame2, sideScrollGame3, forestTextBox, "H A R D", 615, 415, 140, 40, GREY_LIGHT, GREY_DARK, "hard")
+        pygame.draw.rect(gameDisplay, BLACK, (615, 415, 140, 40), 2)
 
 
 
@@ -187,14 +190,15 @@ while intro: #the main loop
         instructions = pygame.image.load("demo.png")
         instructions = pygame.transform.scale(instructions, (600, 400))
         rect2 = instructions.get_rect()
-        rect2.center = (500, 300)
+        rect2.center = (500, 280)
 
         gameDisplay.blit(background_image2, rect)
         # pygame.time.wait(500)
         gameDisplay.blit(instructions, rect2)
 
-        button(sideScrollGame1, sideScrollGame2, sideScrollGame3, forestTextBox, "Press to Play!!", 410, 405, 180, 50, GREY_LIGHT, GREY_DARK, "play")
-        pygame.draw.rect(gameDisplay, BLACK, (410, 405, 180, 50), 2)
+        # pygame.time.wait(2000)
+        button(sideScrollGame1, sideScrollGame2, sideScrollGame3, forestTextBox, "Press to Play!!", 410, 375, 180, 40, GREY_LIGHT, GREY_DARK, "play")
+        pygame.draw.rect(gameDisplay, BLACK, (410, 375, 180, 40), 2)
 
     # else:
     # gameDisplay.blit(infobox, (0,0)
