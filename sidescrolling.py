@@ -10,16 +10,16 @@ W, H = 1000, 600
 win = pygame.display.set_mode((W,H))
 pygame.display.set_caption('Side Scroller')
 
-bg = pygame.image.load(os.path.join('background1.png')).convert()
+bg = pygame.image.load(os.path.join("backgrounds/background1.png")).convert()
 bgX = 0
 bgX2 = bg.get_width()
 
 clock = pygame.time.Clock()
 
 class player(object):
-    run = [pygame.image.load(os.path.join('fox'+ str(x) + 'running' + '.png')) for x in range(1,9)]
-    jump = [pygame.image.load(os.path.join('fox' + 'jump' + str(x) + '.png')) for x in range(0,7)]
-    slide = [pygame.image.load(os.path.join('crouch0.png')),pygame.image.load(os.path.join('crouch1.png')),pygame.image.load(os.path.join('crouch2.png')),pygame.image.load(os.path.join('crouch2.png')), pygame.image.load(os.path.join('crouch2.png')),pygame.image.load(os.path.join('crouch2.png')), pygame.image.load(os.path.join('crouch2.png')), pygame.image.load(os.path.join('crouch2.png')), pygame.image.load(os.path.join('crouch2.png')), pygame.image.load(os.path.join('crouch1.png')), pygame.image.load(os.path.join('crouch2.png'))]
+    run = [pygame.image.load(os.path.join("sprites/running/" + 'fox'+ str(x) + 'running' + '.png')) for x in range(1,9)]
+    jump = [pygame.image.load(os.path.join("sprites/jumping/" + 'fox' + 'jump' + str(x) + '.png')) for x in range(0,7)]
+    slide = [pygame.image.load(os.path.join("sprites/crouch/crouch0.png")),pygame.image.load(os.path.join("sprites/crouch/crouch1.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch1.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png"))]
     jumpList = [1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1,-1,-1,-1,-1,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4]
     def __init__(self, x, y, width, height):
         self.x = x
@@ -62,14 +62,45 @@ class player(object):
             win.blit(self.run[self.runCount//6], (self.x,self.y))
             self.runCount += 1
 
+class trap(object):
+    img = [pygame.image.load(os.path.join("obstacles/trap1.png")),pygame.image.load(os.path.join("obstacles/trap2.png")),pygame.image.load(os.path.join("obstacles/trap3.png")),pygame.image.load(os.path.join("obstacles/trap4.png"))]
+    def __init__ (self, x, y, width, height):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.hitbox = (x,y,width,height)
+        self.count = 0
+
+    def draw(self, win):
+        self.hitbox = (self.x + 5, self.y + 5, self.width - 10, self.height)
+        if self.count >= 8:
+            self.count = 0
+        win.blit(self.img [self.count//2], (self.count, self.y))
+        self.count += 1
+        pygame.draw.rect(win, (255, 0, 0), self.hitbox, 2)
+
+
+class sandBlock(trap):
+    img = pygame.image.load(os.path.join("obstacles/sandblock.png"))
+    def draw(self, win):
+        self.hitbox = (self.x + 10, self.y, 28, 315)
+        win.blit(self.img, (self.x, self.y))
+        pygame.draw.rect(win, (255, 0, 0), self.hitbox,2)
+
 
 def redrawWindow():
     win.blit(bg, (bgX, 0))
     win.blit(bg, (bgX2, 0))
     runner.draw(win)
+    sandBlockk.draw(win)
+    trapp.draw(win)
     pygame.display.update()
 
-runner = player(100, 100, 16, 16)
+sandBlockk = sandBlock(300, 0, 48, 320)
+trapp = trap(300, 300, 64, 64)
+
+runner = player(90, 375, 16, 16)
 pygame.time.set_timer(USEREVENT+1, 500)
 speed = 50
 run = True
