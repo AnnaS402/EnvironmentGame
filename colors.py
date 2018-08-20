@@ -15,3 +15,10 @@ GREY_DARK = (192, 192, 192)
 gameDisplay = pygame.display.set_mode((display_width, display_height))
 
 forestTextBox = False
+permenantColor = False
+RedorGreen = RED
+
+ChoiceA = ["Charles Darwin", "True", "Argentina", "They had the fox as a pet once", "True", "Wolves, racoons, bears"]
+ChoiceB = ["Anne Darwin", "False", "Chile", "They were their favorite animal", "False", "Owls, eagles, hawks"]
+ChoiceC = ["Emma Darwin", 0, "North America", "They discovered, collected, and observed them", 0, "Domestic dogs, pumas, large raptors"]
+ChoiceD = ["Carl Linnaeus", 0, "Canada", "They looked like a fox", 0, "Coyotes, bobcats, hyenas"]

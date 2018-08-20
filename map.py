@@ -39,7 +39,7 @@ def circle(forestTextBox):
 
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
-    print(click)
+    # print(click)
 
     # if (247 > mouse[0] > 253) and (502 > mouse[1] > 508):
     if (253 > mouse[0] > 247) and (508 > mouse[1] > 502):
@@ -88,7 +88,7 @@ sideScrollGame3 = False
 def button(sideScrollGame1, sideScrollGame2, sideScrollGame3, forestTextBox, msg,x,y,w,h,ic,ac, action = None):
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
-    print(click)
+    # print(click)
 
     if (x+w > mouse[0] > x) and (y+h > mouse[1] > y):
         pygame.draw.rect(gameDisplay, ac,(x,y,w,h))
@@ -100,7 +100,7 @@ def button(sideScrollGame1, sideScrollGame2, sideScrollGame3, forestTextBox, msg
                 gameDisplay.fill(WHITE)
                 pygame.display.update()
 
-                print("asdlfj aopw;e jfa;lkdsfaj;lkdsf")
+                # print("asdlfj aopw;e jfa;lkdsfaj;lkdsf")
                 sideScrollGame1 = True
                 # forestTextBox = False
                 return sideScrollGame1
@@ -112,7 +112,7 @@ def button(sideScrollGame1, sideScrollGame2, sideScrollGame3, forestTextBox, msg
                 gameDisplay.fill(WHITE)
                 pygame.display.update()
 
-                print("asdlfj aopw;e jfa;lkdsfaj;lkdsf")
+                # print("asdlfj aopw;e jfa;lkdsfaj;lkdsf")
                 sideScrollGame2 = True
                 # forestTextBox = False
                 return sideScrollGame2
@@ -121,7 +121,7 @@ def button(sideScrollGame1, sideScrollGame2, sideScrollGame3, forestTextBox, msg
                 gameDisplay.fill(WHITE)
                 pygame.display.update()
 
-                print("asdlfj aopw;e jfa;lkdsfaj;lkdsf")
+                # print("asdlfj aopw;e jfa;lkdsfaj;lkdsf")
                 sideScrollGame3 = True
                 # forestTextBox = False
                 return sideScrollGame3
@@ -143,7 +143,7 @@ intro = True
 
 
 while intro: #the main loop
-    print(forestTextBox)
+    # print(forestTextBox)
     for event in pygame.event.get():
         #print(event)
         if event.type == pygame.QUIT:
