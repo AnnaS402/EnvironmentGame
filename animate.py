@@ -15,11 +15,11 @@ while True:
     for e in pygame.event.get():
         if e.type == pygame.USEREVENT:
             counter -= 1
-            text = str(counter).rjust(3) if counter > 0 else 'boom!'
+            text = str(counter).rjust(3) if counter > 0 else 'START!'
         if e.type == pygame.QUIT: break
     else:
         screen.fill((255, 255, 255))
-        screen.blit(font.render(text, True, (0, 0, 0)), (32, 48))
+        screen.blit(font.render(text, True, (0, 0, 0)), (18, 48))
         pygame.display.flip()
         clock.tick(60)
         continue
