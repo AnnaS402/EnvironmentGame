@@ -19,10 +19,20 @@ clock = pygame.time.Clock()
 
 class player(object):
     run = [pygame.image.load(os.path.join("sprites/running/" + 'fox'+ str(x) + 'running' + '.png')) for x in range(1,9)]
-    jump = [pygame.image.load(os.path.join("sprites/jumping/" + 'fox' + 'jump' + str(x) + '.png')) for x in range(0,7)]
-    slide = [pygame.image.load(os.path.join("sprites/crouch/crouch0.png")),pygame.image.load(os.path.join("sprites/crouch/crouch1.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch1.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png"))]
+    jump = [pygame.image.load(os.path.join("sprites/jumping/" + 'fox' + 'jump' + str(x) + '.png')) for x in range(0,8)]
+    # for img in jump:
+    #     print("jumping")
+    slide = [pygame.image.load(os.path.join("sprites/crouch/crouch0.png")),pygame.image.load(os.path.join("sprites/crouch/crouch1.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png"))]
     fall = pygame.image.load(os.path.join("sprites/stop/foxstop.png"))
-    jumpList = [1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1,-1,-1,-1,-1,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4]
+    jumpList = [1,1,1,1,1,1,1,1,1,
+    2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+    3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
+    4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+    -1,-1,-1,-1,-1,-1,-1,-1,-1,
+    -2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,
+    -3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,
+    -4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4]
     def __init__(self, x, y, width, height):
         self.x = x
         self.y = y
@@ -41,25 +51,28 @@ class player(object):
             self.y -= self.jumpList[self.jumpCount] * 1.2
             win.blit(self.jump[self.jumpCount//17], (self.x,self.y))
             self.jumpCount += 1
-            if self.jumpCount > 108:
+            if self.jumpCount > 135:
                 self.jumpCount = 0
                 self.jumping = False
                 self.runCount = 0
-            self.hitbox = (100, 250, 85, 165)
+            self.hitbox = (100, 215, 85, 165)
         elif self.sliding or self.slideUp:
             if self.slideCount < 20:
-                self.y += 1
+                print("hello")
+                # self.y += 1
             elif self.slideCount == 80:
-                self.y -= 19
+                # self.y -= 19
                 self.sliding = False
+                self.slideUp = True
             elif self.slideCount >20 and self.slideCount <80:
-                self.hitbox = (103, 435, 135, 80)
-                # self.slideUp = True
-            if self.slideCount >= 110:
+                self.hitbox = (103, 422, 135, 80)
+                self.slideUp = True
+            if self.slideCount >= 130:
                 self.slideCount = 0
                 self.slideUp = False
                 self.runCount = 0
                 self.hitbox = (94, 381, 165, 100)
+            print(self.slideCount//10)
             win.blit(self.slide[self.slideCount//10], (self.x,self.y))
             self.slideCount += 1
 
