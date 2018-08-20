@@ -22,7 +22,7 @@ class player(object):
     jump = [pygame.image.load(os.path.join("sprites/jumping/" + 'fox' + 'jump' + str(x) + '.png')) for x in range(0,8)]
     # for img in jump:
     #     print("jumping")
-    slide = [pygame.image.load(os.path.join("sprites/crouch/crouch0.png")),pygame.image.load(os.path.join("sprites/crouch/crouch1.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png"))]
+    slide = [pygame.image.load(os.path.join("sprites/crouch/crouch0.png")),pygame.image.load(os.path.join("sprites/crouch/crouch1.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png"))]
     fall = pygame.image.load(os.path.join("sprites/stop/foxstop.png"))
     jumpList = [1,1,1,1,1,1,1,1,1,
     2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
@@ -55,7 +55,7 @@ class player(object):
                 self.jumpCount = 0
                 self.jumping = False
                 self.runCount = 0
-            self.hitbox = (100, 215, 85, 165)
+            self.hitbox = (100, 215, 85, 100)
         elif self.sliding or self.slideUp:
             if self.slideCount < 20:
                 print("hello")
@@ -67,7 +67,7 @@ class player(object):
             elif self.slideCount >20 and self.slideCount <80:
                 self.hitbox = (103, 422, 135, 80)
                 self.slideUp = True
-            if self.slideCount >= 130:
+            if self.slideCount >= 200:
                 self.slideCount = 0
                 self.slideUp = False
                 self.runCount = 0
@@ -77,14 +77,14 @@ class player(object):
             self.slideCount += 1
 
         elif self.falling:
-            win.blit(self.fall, (self.x, self.y + 30))
+            win.blit(self.fall, (self.x, self.y))
 
         else:
             if self.runCount > 42:
                 self.runCount = 0
             win.blit(self.run[self.runCount//6], (self.x,self.y))
             self.runCount += 1
-            self.hitbox = (94, 379, 165, 100)
+            self.hitbox = (130, 379, 120, 100)
         pygame.draw.rect(win, (255, 0,0), self.hitbox, 2)
 
 class trap(object):
@@ -104,43 +104,59 @@ class trap(object):
         win.blit(self.img [self.count//2], (self.x, self.y))
         self.count += 1
         pygame.draw.rect(win, (255, 0, 0), self.hitbox, 2)
-
-#collision detection stuff
-
-    # def collide(self, rect):
-    #     if rect[0] + rect [2] > self.hitbox[0] and rect[0] < self.hitbox[0] + self.hitbox[2]:
-    #         if rect[1] + rect[3] > self.hitbox[1]:
-    #             return True
-    #     return False
-
+# collision detection stuff
+    def collide(self, rect):
+        # print("hitbox 0:", self.hitbox[0])
+        # print("hitbox 1:", self.hitbox[1])
+        # print("hitbox 2:", self.hitbox[2])
+        # print("hitbox 3:", self.hitbox[3])
+        if rect[0] + rect [2] > self.hitbox[0] and rect[0] < self.hitbox[0] + self.hitbox[2]:
+            if rect[1] + rect[3] > self.hitbox[1]:
+                return True
+        return False
 
 class sandBlock(trap):
     img = pygame.image.load(os.path.join("obstacles/sandblock.png"))
     def draw(self, win):
         self.hitbox = (self.x + 47, 366, self.width, self.height)
+        if self.count >= 8:
+            self.count = 0
         win.blit(self.img, (self.x, self.y))
         pygame.draw.rect(win, (255, 0, 0), self.hitbox,2)
+
+    def collide(self, rect):
+        print("hitbox 0:", rect[0])
+        print("hitbox 1:", rect[1])
+        print("hitbox 2:", rect[2])
+        print("hitbox 3:", rect[3])
+        # print("hitbox 3:", self.hitbox[3])
+        print("hitbox 0:", self.hitbox[0])
+        print("hitbox 1:", self.hitbox[1])
+        print("hitbox 2:", self.hitbox[2])
+        print("hitbox 3:", self.hitbox[3])
+        print(rect)
+
+        if rect[0] + rect [2] > self.hitbox[0] and rect[0] < self.hitbox[0] + self.hitbox[2]:
+            if rect[1] > self.hitbox[3]:
+                return True
+        return False
 
 class flag(trap):
     img = pygame.image.load(os.path.join("obstacles/checkpoint.png"))
     def draw(self, win):
         self.hitbox = (self.x, 430, self.width, self.height)
         win.blit(self.img, (self.x, self.y))
+# collision detection stuff
+    def collide(self, rect):
+        # if rect[0] + rect [2] > self.hitbox[0] and rect[0] < self.hitbox[0] + self.hitbox[2]:
+        #     if rect[1] + rect[3] > self.hitbox[1]:
+        #         return True
+        # return False
 
-
-
-
-#collision detection stuff
-    # def collide(self, rect):
-    #     # if rect[0] + rect [2] > self.hitbox[0] and rect[0] < self.hitbox[0] + self.hitbox[2]:
-    #     #     if rect[1] + rect[3] > self.hitbox[1]:
-    #     #         return True
-    #     # return False
-    #
-    #     if rect[0] + rect [2] > self.hitbox[0] and rect[0] < self.hitbox[0] + self.hitbox[2]:
-    #         if rect[1] < self.hitbox[3]:
-    #             return True
-    #     return False
+        if rect[0] + rect [2] > self.hitbox[0] and rect[0] < self.hitbox[0] + self.hitbox[2]:
+            if rect[1] < self.hitbox[3]:
+                return True
+        return False
 
 
 def redrawWindow():
@@ -170,12 +186,12 @@ while run:
 
 
     for objectt in objects:
-        # if objectt.collide(runner.hitbox):
-        #     runner.falling = True
-            # pygame.time.delay(10000)
-        objectt.x -= 1.4
-        if objectt.x < -objectt.width * -1:
+        if objectt.collide(runner.hitbox):
+            # runner.falling = True
+            pygame.time.delay(2000)
             objects.pop(objects.index(objectt))
+        objectt.x -= 1.4
+
 
     for checkpointss in checkpoints:
         checkpointss.x -= 1.4
