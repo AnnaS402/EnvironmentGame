@@ -140,7 +140,7 @@ def Qbutton(msg,x,y,w,h,ic,ac, CorrectColor, action = None, Hilit = RED):
     CorrectColor = False
     return CorrectColor
 
-def OtherButton(msg,x,y,w,h,Hilit = RED):
+def OtherButton(msg,x,y,w,h,Hilit):
     pygame.draw.rect(gameDisplay, BLACK, (x,y,w,h), 2)
     pygame.draw.rect(gameDisplay, Hilit ,(x,y,w,h))
 
@@ -151,9 +151,7 @@ def OtherButton(msg,x,y,w,h,Hilit = RED):
     textRect.center = ( (x+(w/2)), (y+(h/2)) )
     gameDisplay.blit(textSurf, textRect)
 
-def End():
-    pygame.time.delay(3000)
-    print("you should now blank out")
+# def anyClicked(x,y,w,h,Hilit)
 
 
 # for i in range(6):
@@ -203,52 +201,84 @@ while True: # main game loop
         # print(correctLetter)
         # print(CorrectColor)
         if CorrectColor == False:
+            isitclicked = []
             if correctLetter == "A":
                 CorrectColor = Qbutton(ansAs, 220, 300, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA", GREEN)
                 CorrectColorA = CorrectColor
+                isitclicked.append(CorrectColorA)
             #     if colorCorrectA:
             #         print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaa")
             else:
                 CorrectColor = Qbutton(ansAs, 220, 300, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA")
                 WrongColorA = CorrectColor
+                isitclicked.append(WrongColorA)
 
             if correctLetter == "B":
                 CorrectColor = Qbutton(ansBs, 220, 345, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA", GREEN)
                 CorrectColorB = CorrectColor
+                isitclicked.append(CorrectColorB)
             else:
                 CorrectColor = Qbutton(ansBs, 220, 345, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA")
                 WrongColorB = CorrectColor
+                isitclicked.append(WrongColorB)
 
             if Qnum != 2 and Qnum != 5:
                 if correctLetter == "C":
                     CorrectColor = Qbutton(ansCs, 220, 390, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA", GREEN)
                     CorrectColorC = CorrectColor
+                    isitclicked.append(CorrectColorC)
                 else:
                     CorrectColor = Qbutton(ansCs, 220, 390, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA")
                     WrongColorC = CorrectColor
+                    isitclicked.append(WrongColorC)
 
-                CorrectColor = Qbutton(ansDs, 220, 435, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA")
-                WrongColorD = CorrectColor
-        elif CorrectColorA or CorrectColorB or CorrectColorC:
-            if CorrectColorA:
-                OtherButton(ansAs, 220, 300, 560, 30, GREEN)
-            if CorrectColorB:
-                OtherButton(ansBs, 220, 345, 560, 30, GREEN)
-            if Qnum != 2 and Qnum != 5:
-                if CorrectColorC:
-                    OtherButton(ansCs, 220, 390, 560, 30, GREEN
+                if correctLetter == "D":
+                    CorrectColor = Qbutton(ansDs, 220, 435, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA", GREEN)
+                    CorrectColorD = CorrectColor
+                    isitclicked.append(CorrectColorD)
+                else:
+                    CorrectColor = Qbutton(ansDs, 220, 435, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA")
+                    WrongColorD = CorrectColor
+                    isitclicked.append(WrongColorD)
 
-        elif WrongColorA or WrongColorB or WrongColorC or WrongColorD:
-            if WrongColorA:
-                OtherButton(ansAs, 220, 300, 560, 30)
-            if WrongColorB:
-                OtherButton(ansBs, 220, 345, 560, 30)
-            if Qnum != 2 and Qnum != 5:
-                if WrongColorC:
-                    OtherButton(ansCs, 220, 390, 560, 30)
-                if WrongColorD:
-                    OtherButton(ansDs, 220, 435, 560, 30)
+            print(CorrectColor)
+            print(isitclicked)
+            if True in isitclicked:
+                CorrectColor = True
+        # elif CorrectColorA or CorrectColorB or CorrectColorC:
+        #     print("Correct!")
+        #     # print(CorrectColorB + 2)
+        #     # print(CorrectColorC + 3)
+        if CorrectColorB:
+            print("B right")
+            OtherButton(ansBs, 220, 345, 560, 30, GREEN)
+    # elif Qnum != 2 and Qnum != 5:
+        if CorrectColorC:
+            print("C right")
+            OtherButton(ansCs, 220, 390, 560, 30, GREEN)
+        if CorrectColorA:
+            print("A right")
+            OtherButton(ansAs, 220, 300, 560, 30, GREEN)
 
+        # elif WrongColorA==True or WrongColorB==True or WrongColorC==True or WrongColorD==True:
+        #     print("Incorrect")
+        #     # print(WrongColorB + 5)
+        #     # print(WrongColorC + 6)
+        #     # print(WrongColorD + 7)
+
+        if WrongColorB:
+            print("B not")
+            OtherButton(ansBs, 220, 345, 560, 30, RED)
+    # elif Qnum != 2 and Qnum != 5:
+        if WrongColorC:
+            print("C not")
+            OtherButton(ansCs, 220, 390, 560, 30, RED)
+        if WrongColorD:
+            print("D not")
+            OtherButton(ansDs, 220, 435, 560, 30, RED)
+        if WrongColorA:
+            print("A not")
+            OtherButton(ansAs, 220, 300, 560, 30, RED)
 
             # CorrectColor = True
             # print("yes, thank you so much")

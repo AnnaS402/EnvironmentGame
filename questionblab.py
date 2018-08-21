@@ -12,6 +12,7 @@ done = []
 
 Qnum = 0
 CorrectColor = False
+
 CorrectColorA = False
 CorrectColorB = False
 CorrectColorC = False
@@ -140,7 +141,7 @@ def Qbutton(msg,x,y,w,h,ic,ac, CorrectColor, action = None, Hilit = RED):
     CorrectColor = False
     return CorrectColor
 
-def OtherButton(msg,x,y,w,h,Hilit = RED):
+def OtherButton(msg,x,y,w,h, Hilit):
     pygame.draw.rect(gameDisplay, BLACK, (x,y,w,h), 2)
     pygame.draw.rect(gameDisplay, Hilit ,(x,y,w,h))
 
@@ -151,9 +152,9 @@ def OtherButton(msg,x,y,w,h,Hilit = RED):
     textRect.center = ( (x+(w/2)), (y+(h/2)) )
     gameDisplay.blit(textSurf, textRect)
 
-def End():
-    pygame.time.delay(3000)
-    print("you should now blank out")
+# def End():
+    # pygame.time.delay(3000)
+    # print("you should now blank out")
 
 
 # for i in range(6):
@@ -235,11 +236,12 @@ while True: # main game loop
                 CorrectColor = Qbutton(ansDs, 220, 435, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA")
                 WrongColorD = CorrectColor
         if CorrectColorA or CorrectColorB or CorrectColorC:
+            print("Correct!")
             if CorrectColorA:
                 OtherButton(ansAs, 220, 300, 560, 30, GREEN)
                 # EndWorldCounter += 1
 
-            if CorrectColorB:
+            elif CorrectColorB:
                 OtherButton(ansBs, 220, 345, 560, 30, GREEN)
                 # EndWorldCounter += 1
 
@@ -249,15 +251,16 @@ while True: # main game loop
                     # EndWorldCounter += 1
 
         if WrongColorA or WrongColorB or WrongColorC or WrongColorD:
+            print("Incorrect")
             if WrongColorA:
-                OtherButton(ansAs, 220, 300, 560, 30)
-            if WrongColorB:
-                OtherButton(ansBs, 220, 345, 560, 30)
+                OtherButton(ansAs, 220, 300, 560, 30, RED)
+            elif WrongColorB:
+                OtherButton(ansBs, 220, 345, 560, 30, RED)
             if Qnum != 2 and Qnum != 5:
                 if WrongColorC:
-                    OtherButton(ansCs, 220, 390, 560, 30)
-                if WrongColorD:
-                    OtherButton(ansDs, 220, 435, 560, 30)
+                    OtherButton(ansCs, 220, 390, 560, 30, RED)
+                elif WrongColorD:
+                    OtherButton(ansDs, 220, 435, 560, 30,)
 
 
             # CorrectColor = True
