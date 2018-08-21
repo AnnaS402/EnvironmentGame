@@ -236,7 +236,7 @@ while True: # main game loop
                 OtherButton(ansBs, 220, 345, 560, 30, GREEN)
             if Qnum != 2 and Qnum != 5:
                 if CorrectColorC:
-                    OtherButton(ansCs, 220, 390, 560, 30, GREEN
+                    OtherButton(ansCs, 220, 390, 560, 30, GREEN)
 
         elif WrongColorA or WrongColorB or WrongColorC or WrongColorD:
             if WrongColorA:
