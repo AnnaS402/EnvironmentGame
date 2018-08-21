@@ -22,7 +22,7 @@ class player(object):
     jump = [pygame.image.load(os.path.join("sprites/jumping/" + 'fox' + 'jump' + str(x) + '.png')) for x in range(0,8)]
     # for img in jump:
     #     print("jumping")
-    slide = [pygame.image.load(os.path.join("sprites/crouch/crouch0.png")),pygame.image.load(os.path.join("sprites/crouch/crouch1.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png"))]
+    slide = [pygame.image.load(os.path.join("sprites/crouch/crouch0.png")),pygame.image.load(os.path.join("sprites/crouch/crouch1.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")), pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png")),pygame.image.load(os.path.join("sprites/crouch/crouch2.png"))]
     fall = pygame.image.load(os.path.join("sprites/stop/foxstop.png"))
     jumpList = [1,1,1,1,1,1,1,1,1,
     2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
@@ -67,12 +67,12 @@ class player(object):
             elif self.slideCount >20 and self.slideCount <80:
                 self.hitbox = (103, 422, 135, 80)
                 self.slideUp = True
-            if self.slideCount >= 200:
+            if self.slideCount >= 220:
                 self.slideCount = 0
                 self.slideUp = False
                 self.runCount = 0
                 self.hitbox = (94, 381, 165, 100)
-            print(self.slideCount//10)
+            # print(self.slideCount//10)
             win.blit(self.slide[self.slideCount//10], (self.x,self.y))
             self.slideCount += 1
 
@@ -84,8 +84,8 @@ class player(object):
                 self.runCount = 0
             win.blit(self.run[self.runCount//6], (self.x,self.y))
             self.runCount += 1
-            self.hitbox = (130, 379, 120, 100)
-        pygame.draw.rect(win, (255, 0,0), self.hitbox, 2)
+            self.hitbox = (140, 379, 110, 100)
+        # pygame.draw.rect(win, (255, 0,0), self.hitbox, 2)
 
 class trap(object):
     img = [pygame.image.load(os.path.join("obstacles/trap1.png")),pygame.image.load(os.path.join("obstacles/trap2.png")),pygame.image.load(os.path.join("obstacles/trap3.png")),pygame.image.load(os.path.join("obstacles/trap4.png"))]
@@ -103,7 +103,7 @@ class trap(object):
             self.count = 0
         win.blit(self.img [self.count//2], (self.x, self.y))
         self.count += 1
-        pygame.draw.rect(win, (255, 0, 0), self.hitbox, 2)
+        # pygame.draw.rect(win, (255, 0, 0), self.hitbox, 2)
 # collision detection stuff
     def collide(self, rect):
         # print("hitbox 0:", self.hitbox[0])
@@ -118,45 +118,46 @@ class trap(object):
 class sandBlock(trap):
     img = pygame.image.load(os.path.join("obstacles/sandblock.png"))
     def draw(self, win):
-        self.hitbox = (self.x + 47, 366, self.width, self.height)
+        self.hitbox = (self.x + 47, 379, self.width, self.height - 20)
         if self.count >= 8:
             self.count = 0
         win.blit(self.img, (self.x, self.y))
-        pygame.draw.rect(win, (255, 0, 0), self.hitbox,2)
+        # pygame.draw.rect(win, (255, 0, 0), self.hitbox,2)
 
     def collide(self, rect):
-        print("hitbox 0:", rect[0])
-        print("hitbox 1:", rect[1])
-        print("hitbox 2:", rect[2])
-        print("hitbox 3:", rect[3])
+        # print("hitbox 0:", rect[0])
+        # print("hitbox 1:", rect[1])
+        # print("hitbox 2:", rect[2])
+        # print("hitbox 3:", rect[3])
+        # # print("hitbox 3:", self.hitbox[3])
+        # print("hitbox 0:", self.hitbox[0])
+        # print("hitbox 1:", self.hitbox[1])
+        # print("hitbox 2:", self.hitbox[2])
         # print("hitbox 3:", self.hitbox[3])
-        print("hitbox 0:", self.hitbox[0])
-        print("hitbox 1:", self.hitbox[1])
-        print("hitbox 2:", self.hitbox[2])
-        print("hitbox 3:", self.hitbox[3])
-        print(rect)
+        # print(rect)
 
         if rect[0] + rect [2] > self.hitbox[0] and rect[0] < self.hitbox[0] + self.hitbox[2]:
-            if rect[1] > self.hitbox[3]:
+            if rect[0] > self.hitbox[2]:
                 return True
         return False
 
 class flag(trap):
     img = pygame.image.load(os.path.join("obstacles/checkpoint.png"))
     def draw(self, win):
-        self.hitbox = (self.x, 430, self.width, self.height)
+        self.hitbox = (self.x + 50, 350, self.width + 30, 100)
         win.blit(self.img, (self.x, self.y))
+        # pygame.draw.rect(win, (255, 0, 00), self.hitbox, 2)
 # collision detection stuff
-    def collide(self, rect):
-        # if rect[0] + rect [2] > self.hitbox[0] and rect[0] < self.hitbox[0] + self.hitbox[2]:
-        #     if rect[1] + rect[3] > self.hitbox[1]:
-        #         return True
-        # return False
-
+    def collide1(self, rect):
         if rect[0] + rect [2] > self.hitbox[0] and rect[0] < self.hitbox[0] + self.hitbox[2]:
-            if rect[1] < self.hitbox[3]:
+            if rect[1] + rect[3] > self.hitbox[1]:
                 return True
         return False
+        #
+        # if rect[0] + rect [2] > self.hitbox[0] and rect[0] < self.hitbox[0] + self.hitbox[2]:
+        #     if rect[1] < self.hitbox[3]:
+        #         return True
+        # return False
 
 
 def redrawWindow():
@@ -174,7 +175,7 @@ def redrawWindow():
 runner = player(90, 375, 16, 16)
 pygame.time.set_timer(USEREVENT+1, 500)
 pygame.time.set_timer(USEREVENT+2, random.randrange(3000,5000))
-pygame.time.set_timer(USEREVENT+3, 5000)
+pygame.time.set_timer(USEREVENT+3, 15000)
 speed = 80
 run = True
 
@@ -194,11 +195,18 @@ while run:
 
 
     for checkpointss in checkpoints:
-        checkpointss.x -= 1.4
-        if flag == (150, 390):
-            pygame.time.delay(3000)
+        # checkpointss.x -= 1.4
+        # if flag == (150, 390):
+        #     pygame.time.delay(3000)
         # if self.hitbox == (94, 430, self.width, self.height):
         #     pygame.time.delay(3000)
+        if checkpointss.collide1(runner.hitbox):
+            pygame.time.delay(3000)
+            checkpoints.pop(checkpoints.index(checkpointss))
+            import questionTab.py
+
+        checkpointss.x -= 1.4
+
 
     bgX -= 1.4
     bgX2 -= 1.4
