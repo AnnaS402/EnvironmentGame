@@ -5,12 +5,23 @@ from random import *
 
 pygame.init()
 
-questionBank = ["coastalForestQuestion1.png", "coastalForestQuestion2.png", "coastalForestQuestion3.png", "coastalForestQuestion5.png"]
+questionBank = ["coastalForestQuestion1A.png", "coastalForestQuestion2A.png", "coastalForestQuestion3A.png", "coastalForestQuestion5A.png"]
 done = []
 
 # key = pygame.key.get_pressed()
 
 Qnum = 0
+CorrectColor = False
+CorrectColorA = False
+CorrectColorB = False
+CorrectColorC = False
+
+WrongColorA = False
+WrongColorB = False
+WrongColorC = False
+WrongColorD = False
+# print (CorrectColor)
+# ON = True
 
 # print(questionBank)
 # print(done)
@@ -31,10 +42,10 @@ def question_PopUp():
     done.append(question)
     Qnum = int(question[21:22])
 
-    if question == "coastalForestQuestion1.png":
-        questionBank.append("coastalForestQuestion4.png")
+    if question == "coastalForestQuestion1A.png":
+        questionBank.append("coastalForestQuestion4A.png")
     if len(questionBank) == 0:
-        questionBank.append("coastalForestQuestion6.png")
+        questionBank.append("coastalForestQuestion6A.png")
     # print(Qnum)
     # return Qnum
 
@@ -91,25 +102,47 @@ def answer(Qnum):
         #     print("wrong")
         return Letter
 
-def Qbutton(msg,x,y,w,h,ic,ac, Qnum, action = None, Hilit = RED):
+def Qbutton(msg,x,y,w,h,ic,ac, CorrectColor, action = None, Hilit = RED):
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
     # print(click)
-    pygame.draw.rect(gameDisplay, BLACK, (x,y,w,h), 2)
 
+    # if ON:
+    pygame.draw.rect(gameDisplay, BLACK, (x,y,w,h), 2)
     if (x+w > mouse[0] > x) and (y+h > mouse[1] > y):
         pygame.draw.rect(gameDisplay, ac,(x,y,w,h))
 
+
         if click[0] == 1 and action != None:
-            pygame.draw.rect(gameDisplay, Hilit,(x,y,w,h))
-            # permenantColor = True
-            print("True!")
+            pygame.draw.rect(gameDisplay, Hilit, (x,y,w,h))
+            CorrectColor = True
+            # print(CorrectColor)
+            return CorrectColor
             # if action == "map":
             #     import map.py
+    # elif permenantColor:
+        # pygame.draw.rect(gameDisplay, Hilit, (x,y,w,h))
+
     else:
         pygame.draw.rect(gameDisplay, ic,(x,y,w,h))
+
+
     # if permenantColor:
         # pygame.draw.rect(gameDisplay, Hilit ,(x,y,w,h))
+
+
+    smallText = pygame.font.Font("PlayfairDisplay-Regular.otf", 15)
+    textSurface = smallText.render(msg, True, BLACK)
+    textSurf, textRect = textSurface, textSurface.get_rect()
+    textRect.center = ( (x+(w/2)), (y+(h/2)) )
+    gameDisplay.blit(textSurf, textRect)
+
+    CorrectColor = False
+    return CorrectColor
+
+def OtherButton(msg,x,y,w,h,Hilit = RED):
+    pygame.draw.rect(gameDisplay, BLACK, (x,y,w,h), 2)
+    pygame.draw.rect(gameDisplay, Hilit ,(x,y,w,h))
 
 
     smallText = pygame.font.Font("PlayfairDisplay-Regular.otf", 15)
@@ -121,13 +154,18 @@ def Qbutton(msg,x,y,w,h,ic,ac, Qnum, action = None, Hilit = RED):
 
 
 
-
 # for i in range(6):
     # question_PopUp(Qnum)
 checkFlag = True
 timer = 30
 
+# print ("CorrectColor before loop: ")
+# print (CorrectColor)
+
 while True: # main game loop
+    # print ("CorrectColor inside loop: ")
+    # print (CorrectColor)
+
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
@@ -152,30 +190,70 @@ while True: # main game loop
         checkFlag = False
         # print("This should only show up once")
 
+    # print ("CorrectColor before questionpause if: ")
+    # print (CorrectColor)
+
     if questionPause:
         # print(whichQuestion(Qnum))
         # print(ansAs, ansBs, ansCs, ansDs)
         correctLetter = answer(Qnum)
 
-        print(correctLetter)
-
-        if correctLetter == "A":
-            Qbutton(ansAs, 220, 300, 560, 30, WHITE, GREY_DARK, Qnum,  "answerA", GREEN)
-        else:
-            Qbutton(ansAs, 220, 300, 560, 30, WHITE, GREY_DARK, Qnum,  "answerA")
-
-        if correctLetter == "B":
-            Qbutton(ansBs, 220, 345, 560, 30, WHITE, GREY_DARK, Qnum,  "answerA", GREEN)
-        else:
-            Qbutton(ansBs, 220, 345, 560, 30, WHITE, GREY_DARK, Qnum,  "answerA")
-
-        if Qnum != 2 and Qnum != 5:
-            if correctLetter == "C":
-                Qbutton(ansCs, 220, 390, 560, 30, WHITE, GREY_DARK, Qnum,  "answerA", GREEN)
+        # print(correctLetter)
+        # print(CorrectColor)
+        if CorrectColor == False:
+            if correctLetter == "A":
+                CorrectColor = Qbutton(ansAs, 220, 300, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA", GREEN)
+                CorrectColorA = CorrectColor
+            #     if colorCorrectA:
+            #         print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaa")
             else:
-                Qbutton(ansCs, 220, 390, 560, 30, WHITE, GREY_DARK, Qnum,  "answerA")
+                CorrectColor = Qbutton(ansAs, 220, 300, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA")
+                WrongColorA = CorrectColor
 
-            Qbutton(ansDs, 220, 435, 560, 30, WHITE, GREY_DARK, Qnum,  "answerA")
+            if correctLetter == "B":
+                CorrectColor = Qbutton(ansBs, 220, 345, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA", GREEN)
+                CorrectColorB = CorrectColor
+            else:
+                CorrectColor = Qbutton(ansBs, 220, 345, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA")
+                WrongColorB = CorrectColor
+
+            if Qnum != 2 and Qnum != 5:
+                if correctLetter == "C":
+                    CorrectColor = Qbutton(ansCs, 220, 390, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA", GREEN)
+                    CorrectColorC = CorrectColor
+                else:
+                    CorrectColor = Qbutton(ansCs, 220, 390, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA")
+                    WrongColorC = CorrectColor
+
+                CorrectColor = Qbutton(ansDs, 220, 435, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA")
+                WrongColorD = CorrectColor
+        elif CorrectColorA or CorrectColorB or CorrectColorC:
+            if CorrectColorA:
+                OtherButton(ansAs, 220, 300, 560, 30, GREEN)
+            if CorrectColorB:
+                OtherButton(ansBs, 220, 345, 560, 30, GREEN)
+            if Qnum != 2 and Qnum != 5:
+                if CorrectColorC:
+                    OtherButton(ansCs, 220, 390, 560, 30, GREEN
+            pygame.time.delay(3000)
+        elif WrongColorA or WrongColorB or WrongColorC or WrongColorD:
+            if WrongColorA:
+                OtherButton(ansAs, 220, 300, 560, 30)
+            if WrongColorB:
+                OtherButton(ansBs, 220, 345, 560, 30)
+            if Qnum != 2 and Qnum != 5:
+                if WrongColorC:
+                    OtherButton(ansCs, 220, 390, 560, 30)
+                if WrongColorD:
+                    OtherButton(ansDs, 220, 435, 560, 30)
+
+
+            # CorrectColor = True
+            # print("yes, thank you so much")
+        # else:
+            # print("Ah sh*t")
+        # if ON != True:
+            # print("asdfa sdf asdjfal;ksdjf;;a")
 
         # key = pygame.key.get_pressed()
         # Qnum = question_PopUp()
