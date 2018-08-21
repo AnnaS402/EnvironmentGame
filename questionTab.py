@@ -163,7 +163,8 @@ def OtherButton(msg,x,y,w,h,Hilit):
     # question_PopUp(Qnum)
 checkFlag = True
 timernumber2 = 30
-
+score = 0
+print(score)
 # print ("CorrectColor before loop: ")
 # print (CorrectColor)
 
@@ -181,7 +182,7 @@ while True: # main game loop
     if checkFlag:
         # question_PopUp()
         Qnum = question_PopUp()
-        print(Qnum)
+        # print(Qnum)
         # whichQuestion(Qnum)
         ansOptions = whichQuestion(Qnum)
 
@@ -208,20 +209,19 @@ while True: # main game loop
         if CorrectColor == False:
             isitclicked = []
             if correctLetter == "A":
-                CorrectColor = Qbutton(ansAs, 220, 300, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA", GREEN)
-                CorrectColorA = CorrectColor
+                CorrectColorA = Qbutton(ansAs, 220, 300, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA", GREEN)
                 isitclicked.append(CorrectColorA)
+
             #     if colorCorrectA:
             #         print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaa")
             else:
-                CorrectColor = Qbutton(ansAs, 220, 300, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA")
-                WrongColorA = CorrectColor
+                WrongColorA = Qbutton(ansAs, 220, 300, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA")
                 isitclicked.append(WrongColorA)
 
             if correctLetter == "B":
-                CorrectColor = Qbutton(ansBs, 220, 345, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA", GREEN)
-                CorrectColorB = CorrectColor
+                CorrectColorB = Qbutton(ansBs, 220, 345, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA", GREEN)
                 isitclicked.append(CorrectColorB)
+
             else:
                 CorrectColor = Qbutton(ansBs, 220, 345, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA")
                 WrongColorB = CorrectColor
@@ -229,9 +229,9 @@ while True: # main game loop
 
             if Qnum != 2 and Qnum != 5:
                 if correctLetter == "C":
-                    CorrectColor = Qbutton(ansCs, 220, 390, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA", GREEN)
-                    CorrectColorC = CorrectColor
+                    CorrectColorC = Qbutton(ansCs, 220, 390, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA", GREEN)
                     isitclicked.append(CorrectColorC)
+
                 else:
                     CorrectColor = Qbutton(ansCs, 220, 390, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA")
                     WrongColorC = CorrectColor
@@ -241,6 +241,7 @@ while True: # main game loop
                     CorrectColor = Qbutton(ansDs, 220, 435, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA", GREEN)
                     CorrectColorD = CorrectColor
                     isitclicked.append(CorrectColorD)
+
                 else:
                     WrongColorD = Qbutton(ansDs, 220, 435, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA")
                     isitclicked.append(WrongColorD)
@@ -250,54 +251,67 @@ while True: # main game loop
             if True in isitclicked:
                 CorrectColor = True
                 anyClicked = True
+                questionPause = False
         # elif CorrectColorA or CorrectColorB or CorrectColorC:
         #     print("Correct!")
         #     # print(CorrectColorB + 2)
         #     # print(CorrectColorC + 3)
-        if CorrectColorB:
-            # print("B right")
-            OtherButton(ansBs, 220, 345, 560, 30, GREEN)
-    # elif Qnum != 2 and Qnum != 5:
-        if CorrectColorC:
-            # print("C right")
-            OtherButton(ansCs, 220, 390, 560, 30, GREEN)
-        if CorrectColorA:
-            # print("A right")
-            OtherButton(ansAs, 220, 300, 560, 30, GREEN)
+        if CorrectColor:
+            if CorrectColorB:
+                score += 1
+                print(score)# print("B right")
+                OtherButton(ansBs, 220, 345, 560, 30, GREEN)
+        # elif Qnum != 2 and Qnum != 5:
+            if CorrectColorC:
+                score += 1
+                print(score)
+                OtherButton(ansCs, 220, 390, 560, 30, GREEN)
+                # print("C right")
+            if CorrectColorA:
+                score += 1
+                print(score)
+                # print("A right")
+                OtherButton(ansAs, 220, 300, 560, 30, GREEN)
+            if WrongColorB:
+                # print("B not")
+                OtherButton(ansBs, 220, 345, 560, 30, RED)
+        # elif Qnum != 2 and Qnum != 5:
+            if WrongColorC:
+                # print("C not")
+                OtherButton(ansCs, 220, 390, 560, 30, RED)
+            if WrongColorD:
+                # print("D not")
+                OtherButton(ansDs, 220, 435, 560, 30, RED)
+            if WrongColorA:
+                # print("A not")
+                OtherButton(ansAs, 220, 300, 560, 30, RED)
 
-        # elif WrongColorA==True or WrongColorB==True or WrongColorC==True or WrongColorD==True:
-        #     print("Incorrect")
-        #     # print(WrongColorB + 5)
-        #     # print(WrongColorC + 6)
-        #     # print(WrongColorD + 7)
 
-        if WrongColorB:
-            # print("B not")
-            OtherButton(ansBs, 220, 345, 560, 30, RED)
-    # elif Qnum != 2 and Qnum != 5:
-        if WrongColorC:
-            # print("C not")
-            OtherButton(ansCs, 220, 390, 560, 30, RED)
-        if WrongColorD:
-            # print("D not")
-            OtherButton(ansDs, 220, 435, 560, 30, RED)
-        if WrongColorA:
-            # print("A not")
-            OtherButton(ansAs, 220, 300, 560, 30, RED)
+    if anyClicked:
 
+        timer = timer - .01
+        # print(timer)
+        pygame.time.delay(10)
+        if timer <= 0:
+            anyClicked = False
+            theactualend = True
+    if theactualend:
+        theactualend = False
+        questionPause = False
+        checkFlag = True
+        CorrectColor = False
+        timer = .5
+        CorrectColor = False
+        CorrectColorA = False
+        CorrectColorB = False
+        CorrectColorC = False
 
-        if anyClicked:
-            timer = timer - .01
-            print(timer)
-            pygame.time.delay(10)
-            if timer <= 0:
-                anyClicked = False
-                theactualend = True
-        if theactualend:
-            gameDisplay.fill(WHITE)
-
-            # CorrectColor = True
-            # print("yes, thank you so much")
+        WrongColorA = False
+        WrongColorB = False
+        WrongColorC = False
+        WrongColorD = False
+        print(score)
+        # print("yes, thank you so much")
         # else:
             # print("Ah sh*t")
         # if ON != True:

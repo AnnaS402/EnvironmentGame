@@ -36,4 +36,4 @@ WrongColorD = False
 
 anyClicked = False
 theactualend = False
-timer = 1.5
+timer = .5
