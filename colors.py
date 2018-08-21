@@ -23,6 +23,9 @@ ChoiceB = ["Anne Darwin", "False", "Chile", "They were their favorite animal", "
 ChoiceC = ["Emma Darwin", 0, "North America", "They discovered, collected, and observed them", 0, "Domestic dogs, pumas, large raptors"]
 ChoiceD = ["Carl Linnaeus", 0, "Canada", "They looked like a fox", 0, "Coyotes, bobcats, hyenas"]
 
+questionBank = ["coastalForestQuestion1A.png", "coastalForestQuestion2A.png", "coastalForestQuestion3A.png", "coastalForestQuestion5A.png"]
+done = []
+
 Qnum = 0
 CorrectColor = False
 CorrectColorA = False
