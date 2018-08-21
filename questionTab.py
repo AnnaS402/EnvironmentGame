@@ -10,16 +10,21 @@ done = []
 
 # key = pygame.key.get_pressed()
 
-Qnum = 0
-CorrectColor = False
-CorrectColorA = False
-CorrectColorB = False
-CorrectColorC = False
+# Qnum = 0
+# CorrectColor = False
+# CorrectColorA = False
+# CorrectColorB = False
+# CorrectColorC = False
+#
+# WrongColorA = False
+# WrongColorB = False
+# WrongColorC = False
+# WrongColorD = False
+#
+# anyClicked = False
+# timer = 3
 
-WrongColorA = False
-WrongColorB = False
-WrongColorC = False
-WrongColorD = False
+
 # print (CorrectColor)
 # ON = True
 
@@ -157,7 +162,7 @@ def OtherButton(msg,x,y,w,h,Hilit):
 # for i in range(6):
     # question_PopUp(Qnum)
 checkFlag = True
-timer = 30
+timernumber2 = 30
 
 # print ("CorrectColor before loop: ")
 # print (CorrectColor)
@@ -237,27 +242,27 @@ while True: # main game loop
                     CorrectColorD = CorrectColor
                     isitclicked.append(CorrectColorD)
                 else:
-                    CorrectColor = Qbutton(ansDs, 220, 435, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA")
-                    WrongColorD = CorrectColor
+                    WrongColorD = Qbutton(ansDs, 220, 435, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA")
                     isitclicked.append(WrongColorD)
 
-            print(CorrectColor)
-            print(isitclicked)
+            # print(CorrectColor)
+            # print(isitclicked)
             if True in isitclicked:
                 CorrectColor = True
+                anyClicked = True
         # elif CorrectColorA or CorrectColorB or CorrectColorC:
         #     print("Correct!")
         #     # print(CorrectColorB + 2)
         #     # print(CorrectColorC + 3)
         if CorrectColorB:
-            print("B right")
+            # print("B right")
             OtherButton(ansBs, 220, 345, 560, 30, GREEN)
     # elif Qnum != 2 and Qnum != 5:
         if CorrectColorC:
-            print("C right")
+            # print("C right")
             OtherButton(ansCs, 220, 390, 560, 30, GREEN)
         if CorrectColorA:
-            print("A right")
+            # print("A right")
             OtherButton(ansAs, 220, 300, 560, 30, GREEN)
 
         # elif WrongColorA==True or WrongColorB==True or WrongColorC==True or WrongColorD==True:
@@ -267,18 +272,29 @@ while True: # main game loop
         #     # print(WrongColorD + 7)
 
         if WrongColorB:
-            print("B not")
+            # print("B not")
             OtherButton(ansBs, 220, 345, 560, 30, RED)
     # elif Qnum != 2 and Qnum != 5:
         if WrongColorC:
-            print("C not")
+            # print("C not")
             OtherButton(ansCs, 220, 390, 560, 30, RED)
         if WrongColorD:
-            print("D not")
+            # print("D not")
             OtherButton(ansDs, 220, 435, 560, 30, RED)
         if WrongColorA:
-            print("A not")
+            # print("A not")
             OtherButton(ansAs, 220, 300, 560, 30, RED)
+
+
+        if anyClicked:
+            timer = timer - .01
+            print(timer)
+            pygame.time.delay(10)
+            if timer <= 0:
+                anyClicked = False
+                theactualend = True
+        if theactualend:
+            gameDisplay.fill(WHITE)
 
             # CorrectColor = True
             # print("yes, thank you so much")
