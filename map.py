@@ -127,7 +127,7 @@ def button(sideScrollGame1, sideScrollGame2, sideScrollGame3, forestTextBox, msg
                 return sideScrollGame3
 
             elif action == "play":
-                import sidescrolling.py
+                import sidescrolling2.py
                 # gameDisplay.fill(BLACK)
     else:
         pygame.draw.rect(gameDisplay, ic,(x,y,w,h))
@@ -158,7 +158,7 @@ while intro: #the main loop
     # sideScrollGame3 = sideScrollGame
 
     if forestTextBox == True:
-        print("10192837904879135098619845")
+        # print("10192837904879135098619845")
         sideScrollGame1 = button(sideScrollGame1, sideScrollGame2, sideScrollGame3, forestTextBox, "E A S Y", 245, 445, 140, 40, GREY_LIGHT, GREY_DARK, "easy")
         pygame.draw.rect(gameDisplay, BLACK, (245, 445, 140, 40), 2)
         sideScrollGame2 = button(sideScrollGame1, sideScrollGame2, sideScrollGame3, forestTextBox, "N O R M A L", 430, 445, 140, 40, GREY_LIGHT, GREY_DARK, "normal")
@@ -181,8 +181,8 @@ while intro: #the main loop
             bg = sandtrees
         elif sideScrollGame3:
             bg = trees
-        else:
-            print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        # else:
+            # print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         background_image2 = pygame.image.load(bg).convert()
         background_image2 = pygame.transform.scale(background_image2, (1000, 600))
         rect = background_image2.get_rect()

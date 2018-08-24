@@ -9,6 +9,9 @@ from random import *
 # img = pygame.image.load("sprites/running/")
 pygame.init()
 
+questionBank = ["coastalForestQuestion1A.png", "coastalForestQuestion2A.png", "coastalForestQuestion3A.png", "coastalForestQuestion5A.png"]
+done = []
+
 W, H = 1000, 600
 win = pygame.display.set_mode((W,H))
 pygame.display.set_caption('Side Scroller')
@@ -172,35 +175,35 @@ def redrawWindow():
         x.draw(win)
     pygame.display.update()
 
-#definitions for questiontab
-def question_PopUp():
-
+def question_PopUp(first6):
+    # print("I'm in")
     question = questionBank[randint(0,len(questionBank)-1)]
+
     questionBank.remove(question)
     done.append(question)
-    # Qnum = int(question[21:22])
+    Qnum = int(question[21:22])
+
     if question == "coastalForestQuestion1A.png":
         questionBank.append("coastalForestQuestion4A.png")
-    if len(questionBank) == 0:
-        questionBank.append("coastalForestQuestion6A.png")
-    # print(Qnum)
-    # return Qnum
-
-    # print("")
     # print(questionBank)
-    # print("")
-    # print(done)
-    # print("")
-    # print("-----------------------------------")
+    if len(questionBank) == 0:
+        # print("you are now in zero")
+        # if first6:
+        questionBank.append("coastalForestQuestion6A.png")
+            # first6 = False
+            # print("6 is now in list")
+        # else:
+            # print("fix 6 is done")
+            # pygame.display.fill(WHITE)
 
-    # questionPop = pygame.image.load(question).convert()
-    # questionPop = pygame.transform.scale(questionPop, (600, 400))
-    # rect3 = questionPop.get_rect()
-    # rect3.center= (500, 300)
-    #
-    # gameDisplay.blit(questionPop, rect3)
-    # checkFlag = False
-    return(question)
+    questionPop = pygame.image.load(question).convert()
+    questionPop = pygame.transform.scale(questionPop, (600, 400))
+    rect3 = questionPop.get_rect()
+    rect3.center= (500, 300)
+
+    gameDisplay.blit(questionPop, rect3)
+
+    return(Qnum)
 
 def whichQuestion(Qnum):
     ansOptions = []
@@ -211,40 +214,23 @@ def whichQuestion(Qnum):
     return ansOptions
 
 def answer(Qnum):
-    # print("HEY!!!!!!!!!!!")
-    # Qnum = question_PopUp(Qnum)
 
     if Qnum == 4 or Qnum == 6:
         Letter = "C"
-        # if key[pygame.K_c]:
-        #     print("correct")
-        #     # return
-        # else:
-        #     print("wrong")
         return Letter
 
     if Qnum == 1 or Qnum == 2:
         Letter = "A"
-        # if key[pygame.K_a]:
-        #     print("correct")
-        # else:
-        #     print("wrong")
         return Letter
 
     if Qnum == 3 or Qnum == 5:
         Letter = "B"
-        # if key[pygame.K_b]:
-        #     print("correct")
-        # else:
-        #     print("wrong")
         return Letter
 
 def Qbutton(msg,x,y,w,h,ic,ac, CorrectColor, action = None, Hilit = RED):
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
-    # print(click)
 
-    # if ON:
     pygame.draw.rect(gameDisplay, BLACK, (x,y,w,h), 2)
     if (x+w > mouse[0] > x) and (y+h > mouse[1] > y):
         pygame.draw.rect(gameDisplay, ac,(x,y,w,h))
@@ -253,20 +239,10 @@ def Qbutton(msg,x,y,w,h,ic,ac, CorrectColor, action = None, Hilit = RED):
         if click[0] == 1 and action != None:
             pygame.draw.rect(gameDisplay, Hilit, (x,y,w,h))
             CorrectColor = True
-            # print(CorrectColor)
             return CorrectColor
-            # if action == "map":
-            #     import map.py
-    # elif permenantColor:
-        # pygame.draw.rect(gameDisplay, Hilit, (x,y,w,h))
 
     else:
         pygame.draw.rect(gameDisplay, ic,(x,y,w,h))
-
-
-    # if permenantColor:
-        # pygame.draw.rect(gameDisplay, Hilit ,(x,y,w,h))
-
 
     smallText = pygame.font.Font("PlayfairDisplay-Regular.otf", 15)
     textSurface = smallText.render(msg, True, BLACK)
@@ -274,7 +250,6 @@ def Qbutton(msg,x,y,w,h,ic,ac, CorrectColor, action = None, Hilit = RED):
     textRect.center = ( (x+(w/2)), (y+(h/2)) )
     gameDisplay.blit(textSurf, textRect)
     pygame.display.update()
-
     CorrectColor = False
     return CorrectColor
 
@@ -292,29 +267,41 @@ def OtherButton(msg,x,y,w,h,Hilit):
 
 
 runner = player(90, 375, 16, 16)
-pygame.time.set_timer(USEREVENT+1, 500)
-pygame.time.set_timer(USEREVENT+2, rand.randrange(3000,5000))
-pygame.time.set_timer(USEREVENT+3, 30000)
+if questionPause == False and anyClicked == False and theactualend == False:
+    pygame.time.set_timer(USEREVENT+1, 500)
+    pygame.time.set_timer(USEREVENT+2, rand.randrange(1700,5000))
+    if firstflag == True:
+        pygame.time.set_timer(USEREVENT+3, 25000)
+        firstflag = False
 speed = 80
 run = True
 
 objects = []
 checkpoints = []
-checkFlag = False
-questionPause = False
+# checkFlag = True
+timernumber2 = 30
+score = 0
+timesran = 0
+maxtimesran = 6
 
 while run:
-    if questionPause == False:
+    if checkFlag == False and questionPause == False and anyClicked == False and theactualend == False:
         redrawWindow()
     for objectt in objects:
         if objectt.collide(runner.hitbox):
             # runner.falling = True
             pygame.time.delay(2000)
             objects.pop(objects.index(objectt))
-        if checkFlag != True or questionPause != True:
+
+        # if checkFlag == True or questionPause == True or anyClicked == True or theactualend or True:
+            # objects.pop(objects.index(objectt))
+            # objectt.x = 0
+
+        elif checkFlag == False and questionPause == False and anyClicked == False and theactualend == False:
             objectt.x -= 1.4
         else:
             objectt.x = 0
+
 
     for checkpointss in checkpoints:
         # checkpointss.x -= 1.4
@@ -326,11 +313,17 @@ while run:
             # pygame.time.delay(3000)
             checkpoints.pop(checkpoints.index(checkpointss))
             checkFlag = True
-        # print(checkFlag)
         if checkFlag:
-
-            question = question_PopUp()
-            Qnum = int(question[21:22])
+            if timesran < maxtimesran:
+                Qnum = question_PopUp(first6)
+                timesran += 1
+                print("the" + str(timesran))
+            elif timesran >= maxtimesran:
+                gameDisplay.fill(BLACK)
+                pygame.draw.rect(gameDisplay, BLACK ,(220, 300, 560, 30))
+                pygame.draw.rect(gameDisplay, BLACK ,(220, 345, 560, 30))
+                pygame.draw.rect(gameDisplay, BLACK ,(220, 390, 560, 30))
+                pygame.draw.rect(gameDisplay, BLACK ,(220, 435, 560, 30))
 
             ansOptions = whichQuestion(Qnum)
 
@@ -338,47 +331,39 @@ while run:
             ansBs = "B. " + ansOptions[1]
             ansCs = "C. " + str(ansOptions[2])
             ansDs = "D. " + str(ansOptions[3])
+
             questionPause = True
             checkFlag = False
 
-        if questionPause:
-            questionPop = pygame.image.load(question).convert()
-            questionPop = pygame.transform.scale(questionPop, (600, 400))
-            rect3 = questionPop.get_rect()
-            rect3.center= (500, 300)
-
-            gameDisplay.blit(questionPop, rect3)
-            pygame.display.update()
-            # checkFlag = False
-
-
+        if questionPause and timesran <= maxtimesran:
             correctLetter = answer(Qnum)
 
-            if CorrectColor == False:
+            if CorrectColor == False and timesran <= maxtimesran:
                 isitclicked = []
+                # print("ISit1")
                 if correctLetter == "A":
-                    CorrectColor = Qbutton(ansAs, 220, 300, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA", GREEN)
-                    CorrectColorA = CorrectColor
+                    CorrectColorA = Qbutton(ansAs, 220, 300, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA", GREEN)
                     isitclicked.append(CorrectColorA)
+
                 else:
-                    CorrectColor = Qbutton(ansAs, 220, 300, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA")
-                    WrongColorA = CorrectColor
+                    WrongColorA = Qbutton(ansAs, 220, 300, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA")
                     isitclicked.append(WrongColorA)
 
                 if correctLetter == "B":
-                    CorrectColor = Qbutton(ansBs, 220, 345, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA", GREEN)
-                    CorrectColorB = CorrectColor
+                    CorrectColorB = Qbutton(ansBs, 220, 345, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA", GREEN)
                     isitclicked.append(CorrectColorB)
+
                 else:
                     CorrectColor = Qbutton(ansBs, 220, 345, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA")
                     WrongColorB = CorrectColor
                     isitclicked.append(WrongColorB)
 
                 if Qnum != 2 and Qnum != 5:
+                    # print("ISit2")
                     if correctLetter == "C":
-                        CorrectColor = Qbutton(ansCs, 220, 390, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA", GREEN)
-                        CorrectColorC = CorrectColor
+                        CorrectColorC = Qbutton(ansCs, 220, 390, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA", GREEN)
                         isitclicked.append(CorrectColorC)
+
                     else:
                         CorrectColor = Qbutton(ansCs, 220, 390, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA")
                         WrongColorC = CorrectColor
@@ -388,45 +373,76 @@ while run:
                         CorrectColor = Qbutton(ansDs, 220, 435, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA", GREEN)
                         CorrectColorD = CorrectColor
                         isitclicked.append(CorrectColorD)
+
                     else:
                         WrongColorD = Qbutton(ansDs, 220, 435, 560, 30, WHITE, GREY_DARK, CorrectColor,  "answerA")
                         isitclicked.append(WrongColorD)
 
                 if True in isitclicked:
-                    # questionPause = False
                     CorrectColor = True
                     anyClicked = True
-            if CorrectColorB:
-                OtherButton(ansBs, 220, 345, 560, 30, GREEN)
-            if CorrectColorC:
-                OtherButton(ansCs, 220, 390, 560, 30, GREEN)
-            if CorrectColorA:
-                OtherButton(ansAs, 220, 300, 560, 30, GREEN)
+                    questionPause = False
 
+            if CorrectColor and timesran <= maxtimesran:
+                if CorrectColorB:
+                    score += 1
+                    print(score)
+                    OtherButton(ansBs, 220, 345, 560, 30, GREEN)
 
-            if WrongColorB:
-                OtherButton(ansBs, 220, 345, 560, 30, RED)
-            if WrongColorC:
-                OtherButton(ansCs, 220, 390, 560, 30, RED)
-            if WrongColorD:
-                OtherButton(ansDs, 220, 435, 560, 30, RED)
-            if WrongColorA:
-                OtherButton(ansAs, 220, 300, 560, 30, RED)
+                if CorrectColorC:
+                    score += 1
+                    print(score)
+                    OtherButton(ansCs, 220, 390, 560, 30, GREEN)
 
+                if CorrectColorA:
+                    score += 1
+                    print(score)
+                    OtherButton(ansAs, 220, 300, 560, 30, GREEN)
 
-            if anyClicked:
-                timer = timer - .01
-                # print(timer)
-                pygame.time.delay(10)
-                if timer <= 0:
-                    anyClicked = False
-                    theactualend = True
-            if theactualend:
-                questionPause = False
+                if WrongColorB:
+                    OtherButton(ansBs, 220, 345, 560, 30, RED)
 
+                if WrongColorC:
+                    OtherButton(ansCs, 220, 390, 560, 30, RED)
 
+                if WrongColorD:
+                    OtherButton(ansDs, 220, 435, 560, 30, RED)
 
-        checkpointss.x -= 1.4
+                if WrongColorA:
+                    OtherButton(ansAs, 220, 300, 560, 30, RED)
+
+        if anyClicked and timesran <= maxtimesran:
+
+            timer = timer - .01
+            pygame.time.delay(10)
+            if timer <= 0:
+                anyClicked = False
+                theactualend = True
+        if theactualend and timesran <= maxtimesran:
+            theactualend = False
+            questionPause = False
+            checkFlag = True
+            CorrectColor = False
+            timer = .5
+            CorrectColor = False
+            CorrectColorA = False
+            CorrectColorB = False
+            CorrectColorC = False
+
+            WrongColorA = False
+            WrongColorB = False
+            WrongColorC = False
+            WrongColorD = False
+            print(score)
+            if timesran == 6:
+                timesran = 7
+
+        pygame.display.update()
+
+        if questionPause == False and anyClicked == False and theactualend == False:
+            checkpointss.x -= 1.4
+        else:
+            checkpointss.x -= 0
 
 
     bgX -= 1.4

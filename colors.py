@@ -34,6 +34,10 @@ WrongColorB = False
 WrongColorC = False
 WrongColorD = False
 
+checkFlag = False
+questionPause = False
 anyClicked = False
 theactualend = False
+first6 = True
+firstflag = True
 timer = .5
